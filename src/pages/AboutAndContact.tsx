@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { Container, Tabs, Tab, Button, Form, Spinner, Alert } from "react-bootstrap";
+
+//components
+import Skeleton from "../components/Skeleton copy";
 import Header from "../components/Header";
+import Ribz from "../components/Ribz";
+import Strip from "../components/headers/Strip";
+import DynamicDiv from "../components/DynamicDiv";
+import DynamicButton from "../components/buttons/DynamicButton";
+import DynamicP from "../components/p/DynamicP";
 
 export default function AboutAndContact() {
   // About state
@@ -77,8 +85,44 @@ export default function AboutAndContact() {
   };
 
   return (
-    <>
-      <Header />
+    <Skeleton>
+      <Strip title="Ukulele Band Admin Module"/>
+      <DynamicDiv className="d-flex flex-row col-12 justify-content-between align-items-center px-6"
+                  style={{
+                          height:'100px',
+                          width:'98%',
+                          border:'1px solid white'
+                        }}    
+      >
+        <Ribz style={{
+                      height:'100px',
+                      borderRadius:'10px'
+                    }}
+              className="justify-content-between align-items-center mx-2"
+        >
+              
+          <Header brand="Accounts" />
+          <DynamicDiv style={{
+                              height:'70px',
+                              width:'300px',
+                              color:'#2554C7',
+                              backgroundColor:'#FFFFFF',
+                              marginLeft:'10px'
+                            }}
+                      className="d-flex flex-row justify-content-between align-items-center"
+          >
+            <DynamicP text={'Click the button to add a user'}/>
+            <DynamicButton label="Add" style={{
+                                                backgroundColor:'#348017',
+                                                color:'#FFFFFF',
+                                                height:'30px',
+                                                width:'50px',
+                                                marginLeft:'10px'
+                                             }}
+            />
+          </DynamicDiv>
+        </Ribz>
+      </DynamicDiv>
 
       <Container className="py-4">
         <Tabs defaultActiveKey="about" id="about-contact-tabs" className="mb-3" fill>
@@ -163,6 +207,6 @@ export default function AboutAndContact() {
           </Tab>
         </Tabs>
       </Container>
-    </>
+    </Skeleton>
   );
 }

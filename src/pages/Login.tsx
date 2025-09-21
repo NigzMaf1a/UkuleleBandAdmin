@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header"; // <-- import header
+import { toast } from "react-toastify";
+import loginUser from "../scripts/services/loginUser";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -12,48 +13,54 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
+    setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ Email: email, UserPassword: password }),
+      const { token, user } = await loginUser({
+        email,
+        password,
       });
 
-      if (!res.ok) {
-        const { error } = await res.json();
-        throw new Error(error || "Login failed");
+      if (!token || !user) {
+        throw new Error("Invalid server response");
       }
 
-      const data = await res.json();
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
 
-      navigate("/dashboard");
-    } catch (err: any) {
-      setError(err.message);
+      toast.success('Login Successful!!!');
+
+      setTimeout(()=>{
+        switch (user.RegType) {
+          case "Admin":
+            navigate("/dashboard");
+            break;
+          default:
+            console.error('Invalid registration type'); 
+        }
+      }, 3000);
+
+    } catch (err) {
+      console.error("Login failed:", err);
+      setError("Invalid email or password");
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/dashboard");
-    }
-  }, [navigate]);
-
   return (
     <>
-      <Header /> {/* 🔹 Reusable header */}
       <div className="d-flex align-items-center justify-content-center min-vh-100 bg-light">
         <div
           className="card shadow p-4"
           style={{ maxWidth: "400px", width: "100%" }}
         >
           <h1 className="h3 mb-4 text-center fw-bold">Login</h1>
+
+          {error && (
+            <div className="alert alert-danger py-2 text-center">{error}</div>
+          )}
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -79,10 +86,6 @@ export default function Login() {
                 required
               />
             </div>
-
-            {error && (
-              <div className="text-danger text-center mb-3">{error}</div>
-            )}
 
             <button
               type="submit"

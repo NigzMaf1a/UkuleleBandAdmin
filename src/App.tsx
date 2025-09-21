@@ -4,7 +4,9 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Accounts from "./pages/Accounts";
 import AboutAndContact from "./pages/AboutAndContact";
-import Reports from "./pages/Reports"; // <-- Import Reports page
+import Reports from "./pages/Reports";
+import Feedback from "./pages/Feedback";
+import User from "./pages/User";
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/accounts" element={<Accounts />} />
         <Route path="/about-contact" element={<AboutAndContact />} />
-        <Route path="/reports" element={<Reports />} /> {/* <-- New Reports route */}
+        <Route path="/reports" element={<Reports />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/user" element={<User />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>

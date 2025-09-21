@@ -10,7 +10,15 @@ import {
   Col,
   Spinner,
 } from "react-bootstrap";
+
+//components
 import Header from "../components/Header";
+import Skeleton from "../components/Skeleton copy";
+import DynamicDiv from "../components/DynamicDiv";
+import DynamicP from "../components/p/DynamicP";
+import DynamicButton from "../components/buttons/DynamicButton";
+import Strip from "../components/headers/Strip";
+import Ribz from "../components/Ribz";
 
 type ApiData = Record<string, any>;
 
@@ -82,62 +90,100 @@ const Reports: React.FC = () => {
   };
 
   return (
-    <Container fluid className="py-4">
-      <Header/>
-
-      <Tabs
-        activeKey={activeTab}
-        onSelect={(k) => k && setActiveTab(k)}
-        className="mb-3"
+    <Skeleton>
+      <Strip title="Ukulele Band Admin Module"/>
+      <DynamicDiv className="d-flex flex-row col-12 justify-content-between align-items-center px-6"
+                  style={{
+                          height:'100px',
+                          width:'98%',
+                          border:'1px solid white'
+                        }}    
       >
-        {tabsConfig.map((tab) => (
-          <Tab key={tab.key} eventKey={tab.key} title={tab.title}>
-            <Row className="mb-3">
-              <Col md={6}>
-                <Form.Control
-                  type="text"
-                  placeholder={`Search in ${tab.title}`}
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-              </Col>
-              <Col md={6} className="text-end">
-                <Button variant="success" onClick={handleDownload}>
-                  Download CSV
-                </Button>
-              </Col>
-            </Row>
+        <Ribz style={{
+                      height:'100px',
+                      borderRadius:'10px'
+                    }}
+              className="justify-content-between align-items-center mx-2"
+        >
+              
+          <Header brand="Accounts" />
+          <DynamicDiv style={{
+                              height:'70px',
+                              width:'300px',
+                              color:'#2554C7',
+                              backgroundColor:'#FFFFFF',
+                              marginLeft:'10px'
+                            }}
+                      className="d-flex flex-row justify-content-between align-items-center"
+          >
+            <DynamicP text={'Click the button to add a user'}/>
+            <DynamicButton label="Add" style={{
+                                                backgroundColor:'#348017',
+                                                color:'#FFFFFF',
+                                                height:'30px',
+                                                width:'50px',
+                                                marginLeft:'10px'
+                                             }}
+            />
+          </DynamicDiv>
+        </Ribz>
+      </DynamicDiv>
+      <Container fluid className="py-4">
 
-            {loading ? (
-              <div className="text-center my-4">
-                <Spinner animation="border" />
-              </div>
-            ) : filteredData.length > 0 ? (
-              <Table striped bordered hover responsive size="sm">
-                <thead>
-                  <tr>
-                    {Object.keys(filteredData[0]).map((key) => (
-                      <th key={key}>{key}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredData.map((row, idx) => (
-                    <tr key={idx}>
-                      {Object.values(row).map((val, i) => (
-                        <td key={i}>{String(val)}</td>
+        <Tabs
+          activeKey={activeTab}
+          onSelect={(k) => k && setActiveTab(k)}
+          className="mb-3"
+        >
+          {tabsConfig.map((tab) => (
+            <Tab key={tab.key} eventKey={tab.key} title={tab.title}>
+              <Row className="mb-3">
+                <Col md={6}>
+                  <Form.Control
+                    type="text"
+                    placeholder={`Search in ${tab.title}`}
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                </Col>
+                <Col md={6} className="text-end">
+                  <Button variant="success" onClick={handleDownload}>
+                    Download CSV
+                  </Button>
+                </Col>
+              </Row>
+
+              {loading ? (
+                <div className="text-center my-4">
+                  <Spinner animation="border" />
+                </div>
+              ) : filteredData.length > 0 ? (
+                <Table striped bordered hover responsive size="sm">
+                  <thead>
+                    <tr>
+                      {Object.keys(filteredData[0]).map((key) => (
+                        <th key={key}>{key}</th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
-            ) : (
-              <p className="text-muted">No data found.</p>
-            )}
-          </Tab>
-        ))}
-      </Tabs>
-    </Container>
+                  </thead>
+                  <tbody>
+                    {filteredData.map((row, idx) => (
+                      <tr key={idx}>
+                        {Object.values(row).map((val, i) => (
+                          <td key={i}>{String(val)}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              ) : (
+                <p className="text-muted">No data found.</p>
+              )}
+            </Tab>
+          ))}
+        </Tabs>
+      </Container>
+    </Skeleton>
   );
 };
 
