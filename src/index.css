@@ -1,0 +1,76 @@
+.menu{
+    background-color:'blue';
+    border:'1px solid blue';
+}
+
+.close{
+    border-radius: 5px;
+}
+
+.close:hover{
+    border: 2px solid red;
+    color: red;
+}
+
+.navigation-item{
+    color: white;
+    border-bottom: 1px;
+}
+
+.navigation-div{
+    border-bottom: 1px solid rgba(0, 0, 50, 0.8);
+    border-radius: 15px;
+}
+
+.navigation-div:hover{
+    border-bottom: 1px solid white;
+    border-left: 3px solid white;
+    color: blue;
+    z-index: 2;
+    box-shadow: 1px 2px 4px 0 #4C787E;
+    cursor: pointer;
+}
+
+.informer{
+    position:fixed;
+    top: 70px;
+    left: 0;
+    z-index: 1000;
+    height: 90vh;
+    width: 1000px;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.informer-item{
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background-color: white;
+    border-bottom: 3px solid #1589FF;
+    border-left: 5px solid #1589FF;
+    border-top: 1px solid #FFFFFF;
+    border-right: 1px solid grey;
+    box-shadow: 1px 2px 4px 0 blue;
+    margin-left: 10px;
+    margin-top: 5px;
+    z-index: 1000;
+}
+
+.informer-text{
+    color: #1589FF;
+}
+
+.profile-item{
+    border-radius: 4px;
+}
+
+.profile-item:hover{
+    border-bottom: 3px solid yellow;
+}
+
+.informer-kids{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}

@@ -1,10 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
-// import { useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container, Card } from "react-bootstrap";
 
 //scripts
 import Admin from "../scripts/user/Admin";
-// import registerUser from "../scripts/services/registerUser";
 
 //components 
 import Header from "../components/Header";
@@ -17,11 +16,7 @@ import DynamicButton from "../components/buttons/DynamicButton";
 import RegModal from "../components/modals/RegModal";
 import DynamicP from "../components/p/DynamicP";
 
-interface User {
-  RegID:number;
-  Name: string;
-  Email: string;
-}
+import type User from '../interfaces/user';
 
 export default function Dashboard() {
   const [pending, setPending] = useState<User[]>([]);
@@ -29,7 +24,7 @@ export default function Dashboard() {
   const [inactive, setInactive] = useState<User[]>([]);
   const [thisAdmin, setThisAdmin] = useState<Admin>();
   const [showModal, setShowModal] = useState<boolean>(false);
-  // const navigate = useNavigation();
+  const navigate = useNavigate();
 
   function toggleModal(){
     if(showModal === true){
@@ -46,44 +41,35 @@ export default function Dashboard() {
     console.log('Token:', token);
     console.log('User:', user);
 
-    // if (!token) {
-    //   navigate('/login');
-    //   return;
-    // }    
+    if (!token) {
+      navigate('/login');
+      return;
+    }    
     if(user && token)(()=>{
       const admin = new Admin(user.RegID, token);
       setThisAdmin(admin);
     })();
-  }, []);
+  }, [navigate]);
 
   // Fetch data from API
   useEffect(() => {
-    (async () => {
+    if(thisAdmin)(async () => {
       try {
-        const [pRes, aRes, iRes] = await Promise.all([
-          fetch(`http://localhost:5000/api/admin/users/pending`),
-          fetch(`http://localhost:5000/api/admin/users/approved`),
-          fetch("http://localhost:5000/api/admin/users/inactive"),
-        ]);
 
-        if (!pRes.ok || !aRes.ok || !iRes.ok) {
-          throw new Error("Failed to fetch users");
-        }
+        const allPend:User[] = await thisAdmin.fetchPendingUsers(); 
+        const allApproved:User[] = await thisAdmin.fetchApprovedUsers();
+        const allInactive:User[] = await thisAdmin.fetchInactiveUsers();
 
-        const [pData, aData, iData] = await Promise.all([
-          pRes.json(),
-          aRes.json(),
-          iRes.json(),
-        ]);
+        setPending(allPend);
+        setApproved(allApproved);
+        setInactive(allInactive);
 
-        setPending(pData);
-        setApproved(aData);
-        setInactive(iData);
+        console.log('Pending Users:', allPend);
       } catch (err) {
         console.error("Error fetching users:", err);
       }
     })();
-  }, []);
+  }, [thisAdmin]);
 
   // Memoized rendering of user lists
   const pendingList = useMemo(
@@ -110,10 +96,10 @@ export default function Dashboard() {
           email={user.Email}
           buttonText="Deactivate"
           buttonVariant="danger"
-          onAction={() => console.log("Deactivate", user.Email)}
+          onAction={() => thisAdmin? thisAdmin.deactivateUser(user.RegID) : console.error('No Logged in Admin')}
         />
       )),
-    [approved]
+    [approved, thisAdmin]
   );
 
   const inactiveList = useMemo(
@@ -125,10 +111,10 @@ export default function Dashboard() {
           email={user.Email}
           buttonText="Reactivate"
           buttonVariant="warning"
-          onAction={() => console.log("Reactivate", user.Email)}
+          onAction={() => thisAdmin? thisAdmin.reactivateUser(user.RegID) : console.error('No Logged in Admin')}
         />
       )),
-    [inactive]
+    [inactive, thisAdmin]
   );
 
   return (
@@ -206,7 +192,7 @@ export default function Dashboard() {
         )}
       </Container>
       {!pending || !approved || !inactive }
-      {showModal && <RegModal callback1={registerUser} callback2={toggleModal}/>}
+      {showModal && <RegModal callback2={toggleModal}/>}
     </Skeleton>
   );
 }

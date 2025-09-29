@@ -1,4 +1,6 @@
-const BASE_URL = 'http://localhost:5000';
+import link from "./links";
+
+const BASE_URL = link;
 
 export default async function apiFetch<T>(
   endpoint: string,

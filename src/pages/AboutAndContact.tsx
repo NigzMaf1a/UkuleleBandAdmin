@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Container, Tabs, Tab, Button, Form, Spinner, Alert } from "react-bootstrap";
 
 //components
@@ -10,8 +12,18 @@ import DynamicDiv from "../components/DynamicDiv";
 import DynamicButton from "../components/buttons/DynamicButton";
 import DynamicP from "../components/p/DynamicP";
 
+//scripts
+import Admin from "../scripts/user/Admin";
+
+//interfaces
+import type User from "../interfaces/user";
+interface About{
+  Detail: string;
+}
+
 export default function AboutAndContact() {
   // About state
+  const [thisAdmin, setThisAdmin] = useState<Admin>();
   const [aboutText, setAboutText] = useState("");
   const [editingAbout, setEditingAbout] = useState(false);
   const [loadingAbout, setLoadingAbout] = useState(true);
@@ -28,15 +40,34 @@ export default function AboutAndContact() {
   const [editingContact, setEditingContact] = useState(false);
   const [loadingContact, setLoadingContact] = useState(true);
   const [errorContact, setErrorContact] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    const token = localStorage.getItem('token');
+    const userString = localStorage.getItem('user');
+    const user: User | null = userString ? JSON.parse(userString) : null;
+    console.log('Token:', token);
+    console.log('User:', user);
+
+    if (!token) {
+      navigate('/login');
+      return;
+    }    
+    if(user && token)(()=>{
+      const admin = new Admin(user.RegID, token);
+      setThisAdmin(admin);
+    })();
+  }, [navigate]);
 
   // Fetch About info
   useEffect(() => {
     const fetchAbout = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/admin/about");
-        if (!res.ok) throw new Error(`Server error: ${res.status}`);
-        const data = await res.json();
-        setAboutText(data.Detail || "");
+        if(thisAdmin)(async ()=>{
+          const about:About = await thisAdmin.fetchAbout();
+          console.log(about);
+          setAboutText(about.Detail);
+        })();
       } catch (err: any) {
         setErrorAbout(err.message || "Failed to fetch About");
       } finally {
@@ -44,12 +75,18 @@ export default function AboutAndContact() {
       }
     };
     fetchAbout();
-  }, []);
+  }, [thisAdmin]);
 
   // Fetch Contact info
   useEffect(() => {
     const fetchContact = async () => {
       try {
+        // if(thisAdmin)(async ()=>{
+        //   const contacts = await thisAdmin.fetchAbout();
+        //   console.log(about);
+        //   setAboutText(about.Detail);
+        // })();
+
         const res = await fetch("http://localhost:5000/api/admin/contacts");
         if (!res.ok) throw new Error(`Server error: ${res.status}`);
         const data = await res.json();
@@ -63,11 +100,14 @@ export default function AboutAndContact() {
     fetchContact();
   }, []);
 
-  // Placeholder update functions
   const updateAbout = async () => {
     try {
-      // TODO: Replace with actual API call to update About
-      console.log("Updated About:", aboutText);
+      if(thisAdmin){
+        await thisAdmin.editAbout(aboutText);
+        console.log("Updated About:", aboutText);
+        toast.success('About updated successfully');
+      }
+
       setEditingAbout(false);
     } catch (err) {
       console.error("Failed to update About:", err);

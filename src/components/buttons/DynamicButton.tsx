@@ -22,7 +22,7 @@ const DynamicButton: React.FC<ButtonProps> = ({
   return (
     <button
       type={type}
-      className={`btn d-flex flex-row align-items-center justify-content-center w-auto mx-2 px-2 py-2${className}`}
+      className={`btn d-flex flex-row align-items-center justify-content-center ${className}`}
       style={style}
       onClick={onClick}
       onMouseEnter={onHover} 

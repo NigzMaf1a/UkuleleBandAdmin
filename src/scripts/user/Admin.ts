@@ -3,10 +3,29 @@ import endpoints from "../services/utils/endpoints";
 import link from "../services/utils/links";
 
 // Interfaces
-export interface User {
-  RegID: number;
-  RegType: string;
+import type { UserPayload } from "../../interfaces/user";
+import type User from "../../interfaces/user";
+import type About from "../../interfaces/about";
+
+interface RegisterResponse {
+  RegID?: number;
+  message?: string;
+  error?: string;
 }
+
+interface FeedbackResponseUpdate {
+  feedID: number;
+  Response: string;
+}
+
+interface Contact{
+    PhoneNo?:string;
+    EmailAddress?:string;
+    Instagram?:string;
+    Facebook?:string;
+    PoBox?:string;
+}
+
 
 export default class Admin {
   private readonly regID: number;
@@ -43,21 +62,37 @@ export default class Admin {
     return this.apiFetch<User[]>(endpoints.fetchPendingUsers);
   }
 
+  async fetchApprovedUsers(): Promise<User[]> {
+    return this.apiFetch<User[]>(endpoints.fetchApprovedUsers);
+  }
+
+  async fetchInactiveUsers(): Promise<User[]> {
+    return this.apiFetch<User[]>(endpoints.fetchInactiveUsers);
+  }
+
   async approveUser(regID: number): Promise<void> {
-    return this.apiFetch<void>(endpoints.approveUser, {
-      method: "PUT",
+    return this.apiFetch<void>(`${endpoints.approveUser}/${regID}`, {
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(regID),
     });
   }
 
-  async deactivateUser(): Promise<void> {
-    return this.apiFetch<void>(endpoints.deactivateUser);
+
+  async deactivateUser(regID: number): Promise<void> {
+    return this.apiFetch<void>(`${endpoints.deactivateUser}/${regID}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  async reactivateUser(): Promise<void> {
-    return this.apiFetch<void>(endpoints.reactivateUser);
+
+  async reactivateUser(regID: number): Promise<void> {
+    return this.apiFetch<void>(`${endpoints.reactivateUser}/${regID}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+    });
   }
+
 
   async fetchAllUsers(): Promise<User[]> {
     try {
@@ -100,7 +135,54 @@ export default class Admin {
     return this.apiFetch(endpoints.fetchSupplies);
   }
 
-  async addFeedbackResponse() {
-    return this.apiFetch(endpoints.addFeedbackResponse);
+  async addFeedbackResponse(data: FeedbackResponseUpdate): Promise<void> {
+    return this.apiFetch<void>(endpoints.addFeedbackResponse, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+  }
+
+  async registerUser(user:UserPayload){
+    try{
+      const result = await this.apiFetch<RegisterResponse>(endpoints.addUser, {
+        method: 'POST',
+        body: JSON.stringify(user),
+      });
+
+      if (result.error) {
+        throw new Error(result.error);
+      }
+
+      console.log('User registered successfully:', result);
+      return result;
+    } catch(err){
+      console.error('Error occurred while registering the user:', err);
+      throw err;
+    }
+  }
+
+  async fetchAbout():Promise<About>{
+    return this.apiFetch(endpoints.fetchAbout);
+  }
+
+  async editAbout(detail:string){
+    return await this.apiFetch(endpoints.updateAbout, {
+      method:'PUT',
+      body:JSON.stringify({Detail:detail})
+    });
+  }
+
+  async editContacts(contact:Contact){
+    return await this.apiFetch(endpoints.updateContacts, {
+      method:'POST',
+      body:JSON.stringify(contact)
+    });
+  }
+
+  async loggedInAdmin(userID:number):Promise<User[]>{
+    return this.apiFetch<User[]>(`${endpoints.loggedUser}/${userID}`, {
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

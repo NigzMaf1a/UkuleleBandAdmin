@@ -23,32 +23,9 @@ function User() {
 
   return (
     <Skeleton>
-      <Tabs
-        activeKey={activeTab}
-        onSelect={(k) => k && setActiveTab(k)}
-        className="mb-3"
-      >
-        { tabsConfig.map((tab) => (
-            <Tab key={tab.key} eventKey={tab.key} title={tab.title}>
-            <Row className="mb-3">
-              <Col md={6}>
-                <Form.Control
-                  type="text"
-                  placeholder={`Search in ${tab.title}`}
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-              </Col>
-              <Col md={6} className="text-end">
-                <Button variant="success" onClick={handleDownload}>
-                  Download CSV
-                </Button>
-              </Col>
-            </Row>
-            </Tab>
-        ))}
-      </Tabs>
-      {loading && <GlobalModal></GlobalModal>}
+      <Tabs defaultActiveKey="about" id="about-contact-tabs" className="mb-3" fill>
+          <Tab eventKey="about" title="About"></Tab>
+      </Tabs>      
     </Skeleton>
   )
 }

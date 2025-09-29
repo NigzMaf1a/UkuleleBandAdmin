@@ -1,13 +1,10 @@
 import React from 'react';
 import DynamicP from './DynamicP';
-import DynamicDiv from '../containers/DynamicDiv';
-
-// interfaces and types
-import { StringOrNumber } from '@/types/customer';
+import DynamicDiv from '../DynamicDiv';
 
 interface Props {
-  text: StringOrNumber;
-  label: StringOrNumber;
+  text: string;
+  label: string;
   className?: string;
   style?: React.CSSProperties;
 }

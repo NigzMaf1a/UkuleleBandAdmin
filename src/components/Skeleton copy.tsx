@@ -17,7 +17,7 @@ export default function Skeleton({
   return (
     <div
       onClick={onClick}
-      className={`d-flex flex-column gap-3 min-vw-100 min-vh-100 ${className}`}
+      className={`d-flex flex-column gap-3 w-100 h-100 ${className}`}
       style={style}
     >
       {children}

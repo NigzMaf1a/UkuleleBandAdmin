@@ -6,6 +6,7 @@ interface DropdownProps {
   className?: string;
   style?: React.CSSProperties;
   defaultValue?: string;
+  label:string;
 }
 
 const DynamicDropdown: React.FC<DropdownProps> = ({
@@ -14,6 +15,7 @@ const DynamicDropdown: React.FC<DropdownProps> = ({
   className = "",
   style,
   defaultValue,
+  label
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (onChange) onChange(e.target.value);
@@ -27,7 +29,7 @@ const DynamicDropdown: React.FC<DropdownProps> = ({
       onChange={handleChange}
     >
       <option value="" disabled>
-        -- Type --
+        -- {label} --
       </option>
       {values.map((value, index) => (
         <option key={index} value={value}>

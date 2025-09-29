@@ -26,6 +26,14 @@ export default function Login() {
         throw new Error("Invalid server response");
       }
 
+      if(user.RegType !== 'Admin'){
+        toast.error('Invalid registration type. Only admins can login here.');
+        setEmail('');
+        setPassword('');
+        navigate('/login');
+        return;
+      }
+
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 

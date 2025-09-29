@@ -1,3 +1,5 @@
+import link from "../scripts/services/utils/links";
+
 import React, { useState, useEffect } from "react";
 import {
   Container,
@@ -32,7 +34,7 @@ const tabsConfig = [
   { key: "supplies", title: "Supplies", endpoint: "/supplies" },
 ];
 
-const BASE_URL = "http://localhost:5000/api/admin";
+const BASE_URL = link;
 
 const Reports: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("bookings");

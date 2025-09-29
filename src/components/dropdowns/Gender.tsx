@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 //Gender props interface
 interface GenderProps{
@@ -8,10 +7,9 @@ interface GenderProps{
 }
 
 export default function Gender({value, onChange}:GenderProps) {
-  const { t } = useTranslation();
   return (
     <div className="mb-3">
-        <label htmlFor="gender" className="form-label">{t('gender')}</label>
+        <label htmlFor="gender" className="form-label">Gender</label>
             <select
               id="gender"
               name="gender"
@@ -20,9 +18,9 @@ export default function Gender({value, onChange}:GenderProps) {
               onChange={onChange}
               required
             >
-                <option value="" disabled>{t('selectGender')}</option>
-                <option value="Male">{t('male')}</option>
-                <option value="Female">{t('female')}</option>
+                <option value="" disabled>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
             </select>
     </div>
   )

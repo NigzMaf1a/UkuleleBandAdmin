@@ -20,9 +20,9 @@ export interface UserPayload{
     PhoneNo:string;
     Email:string;
     Password:string;
-    Gender:gender;
-    RegType:regType;
+    Gender:string;
+    RegType:string;
     dLocation:string;
     Photo:Blob | null;
-    accStatus:accStatus;
+    accStatus:string;
 }
