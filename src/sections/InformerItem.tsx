@@ -21,13 +21,13 @@ export default function InformerItem({label1, label2, text1, text2, text3}:Infor
   return (
     <DynamicDiv className="d-flex flex-row justify-content-between align-items-center informer-item px-3"
                 style={{
-                        textAlign: loading ? 'center' : 'end'
+                        textAlign: loading ? 'center' : 'start'
                       }}
     >
         {
          loading ? <DynamicP text="Loading...."/> : 
             <>
-                <DynamicDiv className="d-flex flex-column justify-content-between align-items-center gap-3">
+                <DynamicDiv className="d-flex flex-column justify-content-between gap-3">
                     <LabelledP1 label={label1} text={text1}/>
                     <LabelledP1 label={label2} text={text2}/>
                 </DynamicDiv>
