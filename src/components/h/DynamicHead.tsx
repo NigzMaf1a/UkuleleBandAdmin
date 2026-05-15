@@ -1,9 +1,8 @@
 import React from 'react';
-import { StringOrNumber } from '@/types/customer';
 
 // Props interface
 interface Head1Props {
-  text: StringOrNumber;           
+  text: string | number;        
   onClick?: () => void;    
   className?: string;               
   style?: React.CSSProperties;       
@@ -12,7 +11,7 @@ interface Head1Props {
 export default function DynamicHead({
   text,
   onClick,
-  className = "",
+  className,
   style = {},
 }: Head1Props) {
   return (
