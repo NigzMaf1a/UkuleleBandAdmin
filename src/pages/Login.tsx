@@ -29,7 +29,7 @@ export default function Login() {
         throw new Error("Invalid server response");
       }
 
-      if(user.RegType !== 'Admin'){
+      if(user.regtype !== 'Admin'){
         toast.error('Invalid registration type. Only admins can login here.');
         setEmail('');
         setPassword('');
@@ -43,7 +43,7 @@ export default function Login() {
       toast.success('Login Successful!!!');
 
       setTimeout(()=>{
-        switch (user.RegType) {
+        switch (user.regtype) {
           case "Admin":
             navigate("/dashboard");
             break;
@@ -63,13 +63,13 @@ export default function Login() {
 
   return (
     <>
-      <div className="d-flex flex-column align-items-center justify-content-center min-vh-100 background">
+      <div className="align-items-center background d-flex flex-column justify-content-center min-vh-100">
         <LoginStrip/>
         <div
-          className="card shadow p-4"
+          className="card p-4 shadow"
           style={{ maxWidth: "400px", width: "100%" }}
         >
-          <h1 className="h3 mb-4 text-center fw-bold page-title">Login</h1>
+          <h1 className="fw-bold h3 mb-4 page-title text-center">Login</h1>
 
           {error && (
             <div className="alert login-alert py-2 text-center">{error}</div>
@@ -80,7 +80,7 @@ export default function Login() {
               <label className="form-label login-label">Email</label>
               <input
                 type="email"
-                className="form-control blue reg-input"
+                className="blue form-control reg-input"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
@@ -92,7 +92,7 @@ export default function Login() {
               <label className="form-label login-label">Password</label>
               <input
                 type="password"
-                className="form-control blue reg-input"
+                className="blue form-control reg-input"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
@@ -102,7 +102,7 @@ export default function Login() {
 
             <button
               type="submit"
-              className="btn w-100 login-btn"
+              className="btn login-btn w-100"
               disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}

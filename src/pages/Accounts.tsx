@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
-import { Table, Container, Spinner, Alert } from "react-bootstrap";
+import {
+  Table,
+  Container,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
 
-//components
+// components
 import Skeleton from "../components/Skeleton copy";
 import Strip from "../components/headers/Strip";
 import Main from "../components/headers/Main";
 
 import link from "../scripts/services/utils/links";
-
 
 interface User {
   RegID: number;
@@ -25,23 +29,43 @@ interface User {
     | "Band"
     | "Admin"
     | "Supplier";
-  accstatus: "Pending" | "Approved" | "Inactive";
+  accstatus:
+    | "Pending"
+    | "Approved"
+    | "Inactive";
 }
 
 export default function Accounts() {
   const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] =
+    useState<boolean>(true);
+
+  const [error, setError] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`${link}/api/admin/users/all`);
-        if (!res.ok) throw new Error(`Server error: ${res.status}`);
+        const res = await fetch(
+          `${link}/api/admin/users/all`
+        );
+
+        if (!res.ok) {
+          throw new Error(
+            `Server error: ${res.status}`
+          );
+        }
+
         const data: User[] = await res.json();
+
         setUsers(data);
-      } catch (err: any) {
-        setError(err.message || "Something went wrong");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Something went wrong");
+        }
       } finally {
         setLoading(false);
       }
@@ -52,24 +76,36 @@ export default function Accounts() {
 
   return (
     <Skeleton>
-      <Strip title="Ukulele Band Admin Module"/>
-      <Main brand="Accounts"/>
-      <Container className="py-4">
+      <Strip title="Ukulele Band Admin Module" />
+      <Main brand="Accounts" />
 
+      <Container className="py-4">
         {loading && (
           <div className="my-4 text-center">
-            <Spinner animation="border" variant="primary" />
+            <Spinner
+              animation="border"
+              variant="primary"
+            />
           </div>
         )}
 
         {error && (
-          <Alert variant="danger" className="text-center">
+          <Alert
+            variant="danger"
+            className="text-center"
+          >
             {error}
           </Alert>
         )}
 
         {!loading && !error && (
-          <Table striped bordered hover responsive className="shadow-sm">
+          <Table
+            striped
+            bordered
+            hover
+            responsive
+            className="shadow-sm"
+          >
             <thead className="table-primary">
               <tr>
                 <th>#</th>
@@ -80,6 +116,7 @@ export default function Accounts() {
                 <th>ACC Status</th>
               </tr>
             </thead>
+
             <tbody>
               {users.length > 0 ? (
                 users.map((user, index) => (
@@ -94,7 +131,10 @@ export default function Accounts() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={6} className="text-center">
+                  <td
+                    colSpan={6}
+                    className="text-center"
+                  >
                     No accounts found.
                   </td>
                 </tr>
