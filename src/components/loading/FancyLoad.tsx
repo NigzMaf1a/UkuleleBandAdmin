@@ -3,9 +3,6 @@ import {useState, useEffect} from 'react';
 //components
 import GlobalModal from '../modals/GlobalModal';
 import DynamicDiv from '../DynamicDiv';
-import LoadingAnimation from './LoadingAnimation';
-import DynamicHead from '../h/DynamicHead';
-import LabelledP from '../p/LabelledP';
 
 //interfaces
 import type User from '../../interfaces/user';
@@ -19,13 +16,15 @@ export default  function FancyLoad() {
       if(who){
         setUser(who);
       }
+      console.log(user);
+      
     } catch(err){
       console.error(`Error: ${err} occurred while getting the logged in user`)
     }
-  }, []);
+  }, [user]);
   return (
     <GlobalModal>
-      <DynamicDiv className='d-flex flex-column align-items-center'
+      <DynamicDiv className='align-items-center d-flex flex-column'
                   style={{
                           position:'fixed',
                           width:'300px',
@@ -33,6 +32,7 @@ export default  function FancyLoad() {
                           backgroundColor:'#FFFFFF'
                         }}  
       >
+        <></>
       </DynamicDiv>
     </GlobalModal>
   )
