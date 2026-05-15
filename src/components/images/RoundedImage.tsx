@@ -1,12 +1,12 @@
 import React from "react";
 
 interface RoundedImageProps {
-  src: Blob | string;
+  src: string;
   className?: string;
   style?: React.CSSProperties;
 }
 
-const RoundedImage: React.FC<RoundedImageProps> = ({ src, className = "", style = {} }) => {
+const RoundedImage: React.FC<RoundedImageProps> = ({ src, className, style = {} }) => {
   return (
     <img
       src={src}

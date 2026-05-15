@@ -1,5 +1,6 @@
 import React from "react";
 
+
 interface DivProps {
   label:string;
   onClick?: () => void;
@@ -10,7 +11,7 @@ interface DivProps {
 export default function RoundedClickableDivOne({
   label,
   onClick,
-  className = "",
+  className,
   style = {},
 }: DivProps) {
   return (

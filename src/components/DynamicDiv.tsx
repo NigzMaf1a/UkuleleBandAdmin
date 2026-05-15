@@ -14,7 +14,7 @@ export default function DynamicDiv({
   onClick,
   onMouseEnter,
   onMouseLeave,
-  className====,
+  className,
   style = {},
 }: DynamicDivProps) {
   return (

@@ -1,12 +1,13 @@
-import React, { ReactNode } from "react";
+import React from "react";
+import type { ReactNode } from "react";
 
 //components
 import DynamicDiv from "./DynamicDiv";
-import LabelledP from "../p/LabelledP";
-import RoundedImage from "../images/RoundedImage";
+import LabelledP from "./p/LabelledP";
+import RoundedImage from "./images/RoundedImage";
 
 interface DynamicDivProps {
-  src?: Blob | string;
+  src: string;
   label1:string;
   label2:string;
   text1:string | number | undefined;
@@ -26,7 +27,7 @@ export default function MinorDetails({
   text2,
   children,
   onClick,
-  className = "",
+  className,
   style = {},
 }: DynamicDivProps) {
   return (
@@ -36,7 +37,7 @@ export default function MinorDetails({
         className={`d-flex flex-row justify-content-between align-items-center col-12 col-lg-12 col-sm-6 rounded border ${className}`}
         style={style}
         >
-        <DynamicDiv className="d-flex flex-row align-items-center gap-2 ms-2"
+        <DynamicDiv className="align-items-center d-flex flex-row gap-2 ms-2"
                     style={{width:'300px'}}
         >
             <RoundedImage src={src} style={{height:'50px', width:'50px'}}/>
@@ -45,7 +46,7 @@ export default function MinorDetails({
                 <LabelledP label={label2} text={text2}/>
             </DynamicDiv>
         </DynamicDiv>
-        <DynamicDiv className="d-flex flex-column align-items-center justify-content-center me-2 px-1 py-1"
+        <DynamicDiv className="align-items-center d-flex flex-column justify-content-center me-2 px-1 py-1"
                     style={{width:'70px', backgroundColor:'#3EA99F'}}
         >
             {children}

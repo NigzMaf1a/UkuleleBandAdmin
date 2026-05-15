@@ -28,7 +28,7 @@ export default function Header({brand}:headerProps) {
   // const [mouseEntered, setMouseEntered] = useState<boolean>(false);
   // const [nav, setNav] = useState<number>(0);
   const [thisAdmin, setThisAdmin] = useState<Admin>();
-  const [feed, setFeed] = useState<Feedback[]>([]);
+  const [setFeed] = useState<Feedback[]>([]);
 
   //Hover values state
   const [users, setUsers] = useState<User[]>([]);
@@ -93,7 +93,7 @@ export default function Header({brand}:headerProps) {
       return;
     }    
     if(user && token)(()=>{
-      const admin = new Admin(user.RegID, token);
+      const admin = new Admin(user.regid, token);
       setThisAdmin(admin);
     })();
   }, [navigate]);

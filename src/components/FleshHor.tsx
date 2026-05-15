@@ -1,5 +1,6 @@
 "use client";
-import React, { ReactNode } from "react";
+import React from "react";
+import type { ReactNode } from "react";
 
 interface DynamicDivProps {
   children: ReactNode;         
@@ -11,7 +12,7 @@ interface DynamicDivProps {
 export default function FleshHor({
   children,
   onClick,
-  className = "",
+  className,
   style = {},
 }: DynamicDivProps) {
   return (
