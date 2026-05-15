@@ -1,0 +1,147 @@
+/*Animations*/
+@keyframes flashy-red-det {
+  0% {
+    transform: scale(1);
+    border: 1px solid red;
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    border: 1px solid red;
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    border: 1px solid red;
+    opacity: 1;
+  }
+}
+
+@keyframes green-btn-flash {
+  0% {
+    transform: scale(1);
+    background: white;
+    border: 1px solid green;
+    color: green;
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    background: white;
+    border: 1px solid green;
+    color: green;
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    background: white;
+    border: 1px solid green;
+    color: green;
+    opacity: 1;
+  }
+}
+
+@keyframes red-btn-flash {
+  0% {
+    transform: scale(1);
+    background: white;
+    border: 1px solid red;
+    color: red;
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    background: white;
+    border: 1px solid red;
+    color: red;
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    background: white;
+    border: 1px solid red;
+    color: red;
+    opacity: 1;
+  }
+}
+
+@keyframes blue-btn-flash {
+  0% {
+    transform: scale(1);
+    background: blue;
+    border: none;
+    color: white;
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    background: blue;
+    border: none;
+    color: white;
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    background: white;
+    border: 1px solid blue;
+    color: blue;
+    opacity: 1;
+  }
+}
+
+.reg-btn{
+    width: 70px;
+    height: 30px;
+    color: #ffffff;
+}
+
+.reg-btn-close{
+    border: 1px solid red;
+    color: red;
+    animation: red-btn-flash 2s ease-in-out infinite;
+}
+
+.reg-btn-reg{
+    border: 1px solid green;
+    color: green;
+    animation: green-btn-flash 2s ease-in-out infinite;
+}
+
+.reg-btn-close:hover{
+    border: 0;
+    color: white;
+    background-color: red;
+    animation: none;
+}
+
+.reg-btn-reg:hover{
+    border: 0;
+    color: white;
+    background-color: green;
+    animation: none;
+}
+
+
+.user-detail-close-btn{
+    width: 50px;
+    height: 30px;
+    border: 1px solid red;
+    background-color: #ffffff;
+    color: red;
+    animation: flashy-red-det 2s ease-in-out infinite;
+}
+
+.user-detail-close-btn:hover{
+    color: white;
+    background-color: red;
+    border: none;
+    animation: none;
+}
+
+.edit-about{
+  animation: blue-btn-flash 2s ease-in-out infinite;
+}
+
+.edit-about:hover{
+  animation: none;
+}

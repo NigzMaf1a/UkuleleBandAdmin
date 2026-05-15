@@ -5,7 +5,7 @@ export default async function hashPassword(plainPassword: string): Promise<strin
 
     const passwordStr = String(plainPassword);
 
-    // Generate a salt with 10 rounds (standard)
+    // Generate a salt with 10 rounds 
     const salt = await bcrypt.genSalt(10);
 
     // Hash the password with the salt

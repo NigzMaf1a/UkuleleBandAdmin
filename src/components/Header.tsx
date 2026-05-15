@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 //components
 import DynamicDiv from "./DynamicDiv";
 import RoundedImage from "./images/RoundedImage";
-import Informer from "../sections/Informer";
+// import Informer from "../sections/Informer";
+import DynamicP from "./p/DynamicP";
 
 //scripts
 import Admin from "../scripts/user/Admin";
@@ -14,7 +15,8 @@ import Admin from "../scripts/user/Admin";
 //interfaces
 import type User from "../interfaces/user";
 import type About from "../interfaces/about";
-
+// import type Inventory from "../interfaces/inventory";
+import type Feedback from "../interfaces/feedback";
 interface headerProps{
   brand:string;
 }
@@ -23,55 +25,57 @@ export default function Header({brand}:headerProps) {
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
   const [thisBrand, setThisBrand] = useState(brand);
-  const [mouseEntered, setMouseEntered] = useState<boolean>(false);
-  const [nav, setNav] = useState<number>(0);
+  // const [mouseEntered, setMouseEntered] = useState<boolean>(false);
+  // const [nav, setNav] = useState<number>(0);
   const [thisAdmin, setThisAdmin] = useState<Admin>();
+  const [feed, setFeed] = useState<Feedback[]>([]);
 
   //Hover values state
   const [users, setUsers] = useState<User[]>([]);
   const [about, setAbout] = useState<About>();
+  // const [store, setStore] = useState<Inventory[]>([]);
   
   const navigate = useNavigate();
 
-  function toggleMousePresence(){
-    setMouseEntered(prev => !prev);
-  }
+  // function toggleMousePresence(){
+  //   setMouseEntered(prev => !prev);
+  // }
 
-  function nav1(){
-    if(mouseEntered){
-      setNav(1);
-    }
-  }
+  // function nav1(){
+  //   if(mouseEntered){
+  //     setNav(1);
+  //   }
+  // }
 
-  function nav2(){
-    if(mouseEntered){
-      setNav(2);
-    }
-  }
+  // function nav2(){
+  //   if(mouseEntered){
+  //     setNav(2);
+  //   }
+  // }
 
-  function nav3(){
-    if(mouseEntered){
-      setNav(3);
-    }
-  }
+  // function nav3(){
+  //   if(mouseEntered){
+  //     setNav(3);
+  //   }
+  // }
 
-  function nav4(){
-    if(mouseEntered){
-      setNav(4);
-    }
-  }
+  // function nav4(){
+  //   if(mouseEntered){
+  //     setNav(4);
+  //   }
+  // }
 
-  function nav5(){
-    if(mouseEntered){
-      setNav(5);
-    }
-  }
+  // function nav5(){
+  //   if(mouseEntered){
+  //     setNav(5);
+  //   }
+  // }
 
-  function resetNav(){
-    if(!mouseEntered || nav !== 0){
-      setNav(0);
-    }
-  }
+  // function resetNav(){
+  //   if(!mouseEntered || nav !== 0){
+  //     setNav(0);
+  //   }
+  // }
 
   useEffect(()=>{
     setThisBrand(brand);
@@ -98,9 +102,13 @@ export default function Header({brand}:headerProps) {
     if(thisAdmin)( async ()=>{
       const u = await thisAdmin.fetchAllUsers();
       const a = await thisAdmin.fetchAbout();
+      // const i = await thisAdmin.fetchInventory();
+      const f:Feedback[] = await thisAdmin.fetchFeedback();
 
       setUsers(u);
       setAbout(a);
+      // setStore(i);
+      setFeed(f);
     })();
   }, [thisAdmin]);
 
@@ -113,13 +121,13 @@ export default function Header({brand}:headerProps) {
   return (
     <>
       <Navbar  variant="dark" 
-               className="shadow-sm px-2 py-2" 
+               className="px-2 py-2 shadow-sm" 
                style={{
                        backgroundColor:'#0000A0'
                      }}   
                expand={true}>
-        <Container className="justify-content-between align-items-center">
-          <Navbar.Brand href="/" className="fw-bold">
+        <Container className="align-items-center justify-content-between">
+          <Navbar.Brand href="/" className="brand fw-bold">
             {thisBrand}
           </Navbar.Brand>
 
@@ -145,11 +153,10 @@ export default function Header({brand}:headerProps) {
                                               color:'white',
                                               border:'1px solid blue'
                                             }}
-                                      onMouseEnter={toggleMousePresence}
-                                      onMouseLeave={toggleMousePresence}
+
         >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Menu</Offcanvas.Title>
+          <Offcanvas.Title><DynamicP text="Menu" className="menu-text"/></Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <DynamicDiv style={{
@@ -159,55 +166,49 @@ export default function Header({brand}:headerProps) {
                             }}
           >
           <Nav className="flex-column gap-3">
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center navigation-div"
-                        onMouseEnter={nav1}
-                        onMouseLeave={resetNav}
+            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
+                        // onMouseEnter={nav1}
+                        // onMouseLeave={resetNav}
             >
               <Nav.Link as={Link} to="/dashboard" onClick={() => setShowMenu(false)} className="navigation-item"
               >
-                Dashboard
+                <DynamicP text="Dashboard" className="menu-item-text"/>
               </Nav.Link>
               <RoundedImage src={'/account.svg'}/>
             </DynamicDiv>
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center navigation-div"
-                        onMouseEnter={nav2}
-                        onMouseLeave={resetNav}            
+            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
+                        // onMouseEnter={nav2}
+                        // onMouseLeave={resetNav}            
             >
               <Nav.Link as={Link} to="/accounts" onClick={() => setShowMenu(false)} className="navigation-item">
-                Accounts
+                <DynamicP text="Accounts" className="menu-item-text"/>
               </Nav.Link>
               <RoundedImage src={'/account.svg'}/>
             </DynamicDiv>
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center navigation-div"
-                        onMouseEnter={nav3}
-                        onMouseLeave={resetNav}            
+            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
+                        // onMouseEnter={nav3}
+                        // onMouseLeave={resetNav}            
             >
               <Nav.Link as={Link} to="/about-contact" onClick={() => setShowMenu(false)} className="navigation-item">
-                About & Contact
+                <DynamicP text="About & Contact" className="menu-item-text"/>
               </Nav.Link>
               <RoundedImage src={'/account.svg'}/>
             </DynamicDiv>
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center navigation-div"
-                        onMouseEnter={nav4}
-                        onMouseLeave={resetNav}            
+            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
+                        // onMouseEnter={nav4}
+                        // onMouseLeave={resetNav}            
             >
               <Nav.Link as={Link} to="/reports" onClick={() => setShowMenu(false)} className="navigation-item">
-                Reports
+                <DynamicP text="Reports" className="menu-item-text"/>
               </Nav.Link>
               <RoundedImage src={'/account.svg'}/>
             </DynamicDiv>
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center navigation-div"
-                        onMouseEnter={nav5}
-                        onMouseLeave={resetNav}            
+            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
+                        // onMouseEnter={nav5}
+                        // onMouseLeave={resetNav}            
             >
               <Nav.Link as={Link} to="/feedback" onClick={() => setShowMenu(false)} className="navigation-item">
-                Feedback
-              </Nav.Link>
-              <RoundedImage src={'/account.svg'}/>
-            </DynamicDiv>
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center navigation-div">
-              <Nav.Link as={Link} to="/user" onClick={() => setShowMenu(false)} className="navigation-item">
-                User
+                <DynamicP text="Feedback" className="menu-item-text"/>
               </Nav.Link>
               <RoundedImage src={'/account.svg'}/>
             </DynamicDiv>
@@ -224,7 +225,15 @@ export default function Header({brand}:headerProps) {
                     </Offcanvas>
       }
 
-      {mouseEntered && <Informer users={users} nav={nav}/>}
+      {/* {
+        mouseEntered && <Informer users={users} 
+                                  nav={nav}
+                                  store={store}
+                                  about={about}
+                                  feedback={feed}
+
+                        />
+      } */}
     </>
   );
 }

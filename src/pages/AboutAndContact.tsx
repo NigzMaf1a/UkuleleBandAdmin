@@ -5,15 +5,13 @@ import { Container, Tabs, Tab, Button, Form, Spinner, Alert } from "react-bootst
 
 //components
 import Skeleton from "../components/Skeleton copy";
-import Header from "../components/Header";
-import Ribz from "../components/Ribz";
 import Strip from "../components/headers/Strip";
+import Main from "../components/headers/Main";
 import DynamicDiv from "../components/DynamicDiv";
-import DynamicButton from "../components/buttons/DynamicButton";
-import DynamicP from "../components/p/DynamicP";
 
 //scripts
 import Admin from "../scripts/user/Admin";
+import link from "../scripts/services/utils/links";
 
 //interfaces
 import type User from "../interfaces/user";
@@ -31,12 +29,13 @@ export default function AboutAndContact() {
 
   // Contact state
   const [contact, setContact] = useState<{
-    PhoneNo: string;
-    EmailAddress: string;
-    Instagram: string;
-    Facebook: string;
-    POBox: string;
-  }>({ PhoneNo: "", EmailAddress: "", Instagram: "", Facebook: "", POBox: "" });
+    phoneno: string;
+    emailaddress: string;
+    instagram: string;
+    facebook: string;
+    pobox: string;
+  }>({ phoneno: "", emailaddress: "", instagram: "", facebook: "", pobox: "" });
+  
   const [editingContact, setEditingContact] = useState(false);
   const [loadingContact, setLoadingContact] = useState(true);
   const [errorContact, setErrorContact] = useState<string | null>(null);
@@ -54,7 +53,7 @@ export default function AboutAndContact() {
       return;
     }    
     if(user && token)(()=>{
-      const admin = new Admin(user.RegID, token);
+      const admin = new Admin(user.regid, token);
       setThisAdmin(admin);
     })();
   }, [navigate]);
@@ -87,7 +86,7 @@ export default function AboutAndContact() {
         //   setAboutText(about.Detail);
         // })();
 
-        const res = await fetch("http://localhost:5000/api/admin/contacts");
+        const res = await fetch(`${link}/api/contacts/get`);
         if (!res.ok) throw new Error(`Server error: ${res.status}`);
         const data = await res.json();
         setContact(data || {});
@@ -125,51 +124,16 @@ export default function AboutAndContact() {
   };
 
   return (
-    <Skeleton>
+    <Skeleton className="about-page">
       <Strip title="Ukulele Band Admin Module"/>
-      <DynamicDiv className="d-flex flex-row col-12 justify-content-between align-items-center px-6"
-                  style={{
-                          height:'100px',
-                          width:'98%',
-                          border:'1px solid white'
-                        }}    
-      >
-        <Ribz style={{
-                      height:'100px',
-                      borderRadius:'10px'
-                    }}
-              className="justify-content-between align-items-center mx-2"
-        >
-              
-          <Header brand="Accounts" />
-          <DynamicDiv style={{
-                              height:'70px',
-                              width:'300px',
-                              color:'#2554C7',
-                              backgroundColor:'#FFFFFF',
-                              marginLeft:'10px'
-                            }}
-                      className="d-flex flex-row justify-content-between align-items-center"
-          >
-            <DynamicP text={'Click the button to add a user'}/>
-            <DynamicButton label="Add" style={{
-                                                backgroundColor:'#348017',
-                                                color:'#FFFFFF',
-                                                height:'30px',
-                                                width:'50px',
-                                                marginLeft:'10px'
-                                             }}
-            />
-          </DynamicDiv>
-        </Ribz>
-      </DynamicDiv>
+      <Main brand="About"/>
 
       <Container className="py-4">
         <Tabs defaultActiveKey="about" id="about-contact-tabs" className="mb-3" fill>
           {/* About Tab */}
-          <Tab eventKey="about" title="About">
+          <Tab eventKey="about" title="About" >
             {loadingAbout ? (
-              <div className="text-center my-4">
+              <div className="my-4 text-center">
                 <Spinner animation="border" variant="primary" />
               </div>
             ) : errorAbout ? (
@@ -195,7 +159,7 @@ export default function AboutAndContact() {
                 ) : (
                   <>
                     <p>{aboutText || "No about information available."}</p>
-                    <Button variant="primary" onClick={() => setEditingAbout(true)}>
+                    <Button className="edit-about" onClick={() => setEditingAbout(true)}>
                       Edit About
                     </Button>
                   </>
@@ -207,26 +171,29 @@ export default function AboutAndContact() {
           {/* Contact Tab */}
           <Tab eventKey="contact" title="Contact">
             {loadingContact ? (
-              <div className="text-center my-4">
+              <div className="my-4 text-center">
                 <Spinner animation="border" variant="primary" />
               </div>
             ) : errorContact ? (
               <Alert variant="danger">{errorContact}</Alert>
             ) : (
-              <Form>
-                {["PhoneNo", "EmailAddress", "Instagram", "Facebook", "POBox"].map((field) => (
-                  <Form.Group className="mb-3" key={field}>
-                    <Form.Label>{field}</Form.Label>
-                    <Form.Control
-                      type="text"
-                      value={(contact as any)[field] || ""}
-                      onChange={(e) =>
-                        setContact((prev) => ({ ...prev, [field]: e.target.value }))
-                      }
-                      readOnly={!editingContact}
-                    />
-                  </Form.Group>
-                ))}
+              <Form className="align-items-center d-flex flex-column justify-content-center">
+                <DynamicDiv className="contact-form mb-3 px-3 py-2">
+                  {["phoneno", "emailaddress", "instagram", "facebook", "pobox"].map((field) => (
+                    <Form.Group className="mb-3" key={field}>
+                      <Form.Label className="contact-label">{field}</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={(contact as any)[field] || ""}
+                        onChange={(e) =>
+                          setContact((prev) => ({ ...prev, [field]: e.target.value }))
+                        }
+                        readOnly={!editingContact}
+                        className="contact-input"
+                      />
+                    </Form.Group>
+                  ))}
+                </DynamicDiv>
 
                 {editingContact ? (
                   <>
@@ -238,7 +205,7 @@ export default function AboutAndContact() {
                     </Button>
                   </>
                 ) : (
-                  <Button variant="primary" onClick={() => setEditingContact(true)}>
+                  <Button className="edit-about" onClick={() => setEditingContact(true)}>
                     Edit Contact
                   </Button>
                 )}

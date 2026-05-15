@@ -1,15 +1,13 @@
-// src/pages/Feedback.tsx
 import { useState, useEffect } from "react";
 import { Container, Card, Button, Form, Spinner, Alert } from "react-bootstrap";
 
 //components
-import Header from "../components/Header";
 import Skeleton from "../components/Skeleton copy";
-import DynamicDiv from "../components/DynamicDiv";
-import Ribz from "../components/Ribz";
-import DynamicP from "../components/p/DynamicP";
-import DynamicButton from "../components/buttons/DynamicButton";
 import Strip from "../components/headers/Strip";
+import Main from "../components/headers/Main";
+
+import link from "../scripts/services/utils/links";
+
 
 export interface FeedbackRow {
   FeedbackID: number;
@@ -31,7 +29,7 @@ export default function Feedback() {
   useEffect(() => {
     const fetchFeedback = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/admin/feedback");
+        const res = await fetch(`${link}/api/admin/feedback`);
         if (!res.ok) throw new Error(`Server error: ${res.status}`);
         const data: FeedbackRow[] = await res.json();
         setFeedbacks(data);
@@ -49,7 +47,7 @@ export default function Feedback() {
     if (!newResponse.trim()) return;
 
     try {
-      const res = await fetch("http://localhost:5000/api/feedback/put", {
+      const res = await fetch(`${link}/api/feedback/put`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -76,45 +74,10 @@ export default function Feedback() {
   return (
     <Skeleton>
       <Strip title="Ukulele Band Admin Module"/>
-      <DynamicDiv className="d-flex flex-row col-12 justify-content-between align-items-center px-6"
-                  style={{
-                          height:'100px',
-                          width:'98%',
-                          border:'1px solid white'
-                        }}    
-      >
-        <Ribz style={{
-                      height:'100px',
-                      borderRadius:'10px'
-                    }}
-              className="justify-content-between align-items-center mx-2"
-        >
-              
-          <Header brand="Accounts" />
-          <DynamicDiv style={{
-                              height:'70px',
-                              width:'300px',
-                              color:'#2554C7',
-                              backgroundColor:'#FFFFFF',
-                              marginLeft:'10px'
-                            }}
-                      className="d-flex flex-row justify-content-between align-items-center"
-          >
-            <DynamicP text={'Click the button to add a user'}/>
-            <DynamicButton label="Add" style={{
-                                                backgroundColor:'#348017',
-                                                color:'#FFFFFF',
-                                                height:'30px',
-                                                width:'50px',
-                                                marginLeft:'10px'
-                                             }}
-            />
-          </DynamicDiv>
-        </Ribz>
-      </DynamicDiv>
-      <Container className="py-4">
+      <Main brand="Feedback"/>
+      <Container className="feed-body py-4">
         {loading && (
-          <div className="text-center my-4">
+          <div className="my-4 text-center">
             <Spinner animation="border" variant="primary" />
           </div>
         )}
@@ -125,17 +88,17 @@ export default function Feedback() {
           !error &&
           feedbacks.map((fb) => (
             <Card key={fb.FeedbackID} className="mb-3 shadow-sm">
-              <Card.Body className="d-flex justify-content-between align-items-start flex-wrap">
+              <Card.Body className="align-items-start d-flex feed-cont flex-wrap justify-content-between">
                 <div style={{ flex: 1, minWidth: "200px", marginRight: "20px" }}>
-                  <h5>{fb.Name}</h5>
-                  <p>{fb.Comments}</p>
+                  <h5 className="feed-name">Name: {fb.name}</h5>
+                  <p className="comment">Comment: {fb.comments}</p>
                   <p>Rating: {fb.Rating} / 5</p>
                 </div>
 
-                <div style={{ flex: 1, minWidth: "200px" }}>
+                <div style={{ flex: 1, minWidth: "200px" }} className="align-items-center d-flex justify-content-center mx-auto my-auto">
                   {fb.Response ? (
-                    <p>
-                      <strong>Response:</strong> {fb.Response}
+                    <p className="response">
+                      <strong>Response:</strong> {fb.response}
                     </p>
                   ) : editingId === fb.FeedbackID ? (
                     <Form

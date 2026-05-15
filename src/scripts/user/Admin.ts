@@ -6,6 +6,8 @@ import link from "../services/utils/links";
 import type { UserPayload } from "../../interfaces/user";
 import type User from "../../interfaces/user";
 import type About from "../../interfaces/about";
+import type Inventory from "../../interfaces/inventory";
+import type Feedback from "../../interfaces/feedback";
 
 interface RegisterResponse {
   RegID?: number;
@@ -32,13 +34,13 @@ export default class Admin {
   private readonly token: string;
   public url: string;
 
-  constructor(regID: number, token: string, backendUrl: string = link) {
-    if (!token || !regID) {
-      console.error("Invalid Session");
-      throw new Error("Unauthorized access. Please login");
-    }
+  constructor(regid: number, token: string, backendUrl: string = link) {
+    // if (!token || !regid) {
+    //   console.error("Invalid Session");
+    //   throw new Error("Unauthorized access. Please login");
+    // }
 
-    this.regID = regID;
+    this.regID = regid;
     this.token = token;
     this.url = backendUrl;
   }
@@ -103,7 +105,7 @@ export default class Admin {
     }
   }
 
-  async fetchFeedback() {
+  async fetchFeedback() :Promise<Feedback[]> {
     return this.apiFetch(endpoints.fetchFeedback);
   }
 
@@ -123,7 +125,7 @@ export default class Admin {
     return this.apiFetch(endpoints.fetchInpections);
   }
 
-  async fetchInventory() {
+  async fetchInventory():Promise<Inventory[]>{
     return this.apiFetch(endpoints.fetchInventory);
   }
 
@@ -184,5 +186,12 @@ export default class Admin {
     return this.apiFetch<User[]>(`${endpoints.loggedUser}/${userID}`, {
       headers: { "Content-Type": "application/json" },
     });
+  }
+
+  async updateAdmin(admin:UserPayload){
+    return await this.apiFetch(endpoints.updateUser, {
+      method:'PATCH',
+      body:JSON.stringify(admin)
+    })
   }
 }

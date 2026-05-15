@@ -1,0 +1,17 @@
+.background{
+    background: conic-gradient(at top left, blue, white, gold),
+        radial-gradient(circle at top right, rgba(255,255,255,0.6), transparent 60%),
+        linear-gradient(135deg, #ff512f, #dd2476);
+}
+
+.page-title{
+    color: #0000A0;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 900;
+    font-size: 34px;
+}
+
+.about-page{
+    background: linear-gradient(180deg, blue, white);
+}

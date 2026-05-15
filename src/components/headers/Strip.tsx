@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 //components
 import DynamicDiv from "../DynamicDiv";
@@ -26,6 +27,9 @@ function Strip({title}:StripProps) {
   const [showModal3, setShowModal3] = useState<boolean>(false);
   const [thisAdmin, setThisAdmin] = useState<Admin>();
   const [userData, setUserData] = useState<User>();
+  const [mode, setMode] = useState<'light' | 'dark'>('light');
+  const [light, setLight] = useState<boolean>(false);
+  const [dark, setDark] = useState<boolean>(false);
   const navigate = useNavigate();
 
   function toggleModal() {
@@ -38,6 +42,31 @@ function Strip({title}:StripProps) {
 
   function toggleModalThree() {
     setShowModal3(prev => !prev);
+  }
+
+  function toggleMode(){
+    if(mode === 'light') setMode('dark');
+    if(mode === 'dark') setMode('light');
+  }
+
+  useEffect(()=>{
+    if(mode === 'light'){
+      setLight(true);
+      setDark(false);
+    }
+
+    if(mode === 'dark'){
+      setLight(false);
+      setDark(true);
+    }   
+    console.log(mode); 
+  }, [mode]);
+
+
+  async function logOutUser(){
+    await localStorage.clear();
+    toast.success('Log out successful!');
+    setTimeout(()=>{navigate('/login')}, 3000)
   }
 
   useEffect(()=>{
@@ -93,34 +122,36 @@ function Strip({title}:StripProps) {
                         src={'/account.svg'}
           />
         </DynamicDiv>
-        <DynamicP text={title}/>
+        <DynamicP text={title} className="tag"/>
         <DynamicDiv className="d-flex flex-column justify-content-center align-items-center bg-white rounded-circle"
-                    onClick={toggleModal}
+                    onClick={toggleMode}
                     style={{
                             height:'40px',
                             width:'40px',
-                            cursor:'pointer'
+                            cursor:'pointer',
+                            backgroundColor: light ? 'white' : 'black'
                           }}  
-        > 
-          <RoundedImage style={{
+        > {light ? 'Light' : 'Dark'}
+          {/* <RoundedImage style={{
                                 height:'40px',
                                 width:'40px'
                               }}
                         src={'/vite.svg'}
-          />
+          /> */}
         </DynamicDiv>
       </DynamicDiv>
       {showModal && <Profile user={userData} 
                              callback1={toggleModal}
                              callback2={toggleModalTwo}
                              callback3={toggleModalThree}
+                             callback4={logOutUser}
                     />
       }
 
-      {showModal2 && <EditProfile/>
+      {showModal2 && <EditProfile user={userData} callback1={toggleModalTwo}/>
       }
 
-      {showModal3 && <SwitchUser/>}
+      {showModal3 && <SwitchUser callback1={toggleModal} callback2={toggleModalThree}/>}
     </>
   )
 }

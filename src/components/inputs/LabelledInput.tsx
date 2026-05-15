@@ -21,13 +21,13 @@ export default function LabelledInput({
 }: InputProps) {
   return (
     <div className={`mb-3 ${className}`} style={style}>
-      <label className="form-label fw-bold">{label}</label>
+      <label className="form-label fw-bold blue">{label}</label>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="form-control"
+        className="form-control reg-input"
       />
     </div>
   );

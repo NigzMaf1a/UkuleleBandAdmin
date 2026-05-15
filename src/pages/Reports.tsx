@@ -14,24 +14,20 @@ import {
 } from "react-bootstrap";
 
 //components
-import Header from "../components/Header";
 import Skeleton from "../components/Skeleton copy";
-import DynamicDiv from "../components/DynamicDiv";
-import DynamicP from "../components/p/DynamicP";
-import DynamicButton from "../components/buttons/DynamicButton";
 import Strip from "../components/headers/Strip";
-import Ribz from "../components/Ribz";
+import Main from "../components/headers/Main";
 
 type ApiData = Record<string, any>;
 
 const tabsConfig = [
-  { key: "bookings", title: "Booking", endpoint: "/bookings" },
-  { key: "lending", title: "Lending", endpoint: "/lending" },
-  { key: "penalties", title: "Penalty", endpoint: "/penalties" },
-  { key: "inspection", title: "Inspection", endpoint: "/inspection" },
-  { key: "inventory", title: "Inventory", endpoint: "/inventory" },
-  { key: "transactions", title: "Transactions", endpoint: "/finances" },
-  { key: "supplies", title: "Supplies", endpoint: "/supplies" },
+  { key: "bookings", title: "Booking", endpoint: "/api/booking/get" },
+  { key: "lending", title: "Lending", endpoint: "/api/lending/get" },
+  { key: "penalties", title: "Penalty", endpoint: "/api/penalty/get" },
+  { key: "inspection", title: "Inspection", endpoint: "/api/inspection/get" },
+  { key: "inventory", title: "Inventory", endpoint: "/api/inventory/get" },
+  { key: "transactions", title: "Finances", endpoint: "/api/finance/get" },
+  { key: "supplies", title: "Supplies", endpoint: "/api/supply/get" },
 ];
 
 const BASE_URL = link;
@@ -60,7 +56,6 @@ const Reports: React.FC = () => {
 
   useEffect(() => {
     fetchData(activeTab);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
   const currentData: ApiData[] = data[activeTab] || [];
@@ -94,42 +89,7 @@ const Reports: React.FC = () => {
   return (
     <Skeleton>
       <Strip title="Ukulele Band Admin Module"/>
-      <DynamicDiv className="d-flex flex-row col-12 justify-content-between align-items-center px-6"
-                  style={{
-                          height:'100px',
-                          width:'98%',
-                          border:'1px solid white'
-                        }}    
-      >
-        <Ribz style={{
-                      height:'100px',
-                      borderRadius:'10px'
-                    }}
-              className="justify-content-between align-items-center mx-2"
-        >
-              
-          <Header brand="Accounts" />
-          <DynamicDiv style={{
-                              height:'70px',
-                              width:'300px',
-                              color:'#2554C7',
-                              backgroundColor:'#FFFFFF',
-                              marginLeft:'10px'
-                            }}
-                      className="d-flex flex-row justify-content-between align-items-center"
-          >
-            <DynamicP text={'Click the button to add a user'}/>
-            <DynamicButton label="Add" style={{
-                                                backgroundColor:'#348017',
-                                                color:'#FFFFFF',
-                                                height:'30px',
-                                                width:'50px',
-                                                marginLeft:'10px'
-                                             }}
-            />
-          </DynamicDiv>
-        </Ribz>
-      </DynamicDiv>
+      <Main brand="Reports"/>
       <Container fluid className="py-4">
 
         <Tabs
@@ -156,7 +116,7 @@ const Reports: React.FC = () => {
               </Row>
 
               {loading ? (
-                <div className="text-center my-4">
+                <div className="my-4 text-center">
                   <Spinner animation="border" />
                 </div>
               ) : filteredData.length > 0 ? (

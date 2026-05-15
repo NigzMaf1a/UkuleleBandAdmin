@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 //components
 import GlobalModal from "../components/modals/GlobalModal";
 import DynamicDiv from "../components/DynamicDiv";
@@ -15,15 +17,19 @@ interface ProfileProps{
     callback4:()=>void;
 }
 
+
 export default function Profile({user, callback1, callback2, callback3, callback4}:ProfileProps) {
+  const [/*mouseOn*/, setMouseOn] = useState<boolean>(false);
+
+  function toggleMousePresence(){
+    setMouseOn(prev => !prev);
+  }
+
   return (
     <GlobalModal>
-        <DynamicDiv style={{
-                            width:'300px',
-                            height:'500px',
-                            backgroundColor:'#ffffff'
-                           }}
-                    className="d-flex flex-column justify-content-center align-items-center px-3 py-3 gap-2 "  
+        <DynamicDiv   className="d-flex flex-column justify-content-center align-items-center px-3 py-3 gap-2 profile prof-style"
+          onMouseEnter={toggleMousePresence}
+          onMouseLeave={toggleMousePresence}  
         >
             <RoundedImage src={'/nzaumi.jpg'}
                           style={{
@@ -43,37 +49,31 @@ export default function Profile({user, callback1, callback2, callback3, callback
 
             </DynamicDiv>
 
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center border-bottom px-2 profile-item"
+            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center px-2 profile-item edit-profile"
                         style={{
                                 width:'100%',
-                                height:'30px',
-                                cursor:'pointer',
-                                color:'gray'
+                                height:'30px'
                                }}
                         onClick={callback2}  
             >
                 Edit Profile
             </DynamicDiv>
 
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center border-bottom px-2"
+            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center px-2 profile-item switch-user"
                         onClick={callback3}
                         style={{
                                 width:'100%',
-                                height:'30px',
-                                cursor:'pointer',
-                                color:'gray'
+                                height:'30px'
                               }}  
             >
                 Switch User
             </DynamicDiv>
 
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center border-bottom px-2"
+            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center px-2 profile-item logout"
                         onClick={callback4}
                         style={{
                                 width:'100%',
-                                height:'30px',
-                                cursor:'pointer',
-                                color:'gray'
+                                height:'30px'
                               }}  
             >
                 Log Out
@@ -81,13 +81,7 @@ export default function Profile({user, callback1, callback2, callback3, callback
 
             <DynamicButton label="Close"
                            onClick={callback1}
-                           style={{
-                                    border:'1px solid grey',
-                                    width:'50px',
-                                    height:'30px',
-                                    color:'grey'
-                                 }}
-                           className="mt-4 close"
+                           className="mt-4 close profile-close"
             />                                                                   
         </DynamicDiv>
     </GlobalModal>

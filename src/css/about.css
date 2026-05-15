@@ -1,0 +1,16 @@
+.contact-form{
+    border: 1px solid white;
+    box-shadow: 0 2px 4px 0 blue;
+    width: 500px;
+}
+
+.contact-label{
+    color: blue;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+.contact-input:hover{
+    color: blue;
+}

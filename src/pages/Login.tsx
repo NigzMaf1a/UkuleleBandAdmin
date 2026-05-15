@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import loginUser from "../scripts/services/loginUser";
 
+//components
+import LoginStrip from "../components/headers/LoginStrip";
+
 export default function Login() {
   const navigate = useNavigate();
 
@@ -52,6 +55,7 @@ export default function Login() {
     } catch (err) {
       console.error("Login failed:", err);
       setError("Invalid email or password");
+      toast.error(error);
     } finally {
       setLoading(false);
     }
@@ -59,23 +63,24 @@ export default function Login() {
 
   return (
     <>
-      <div className="d-flex align-items-center justify-content-center min-vh-100 bg-light">
+      <div className="d-flex flex-column align-items-center justify-content-center min-vh-100 background">
+        <LoginStrip/>
         <div
           className="card shadow p-4"
           style={{ maxWidth: "400px", width: "100%" }}
         >
-          <h1 className="h3 mb-4 text-center fw-bold">Login</h1>
+          <h1 className="h3 mb-4 text-center fw-bold page-title">Login</h1>
 
           {error && (
-            <div className="alert alert-danger py-2 text-center">{error}</div>
+            <div className="alert login-alert py-2 text-center">{error}</div>
           )}
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label className="form-label">Email</label>
+              <label className="form-label login-label">Email</label>
               <input
                 type="email"
-                className="form-control"
+                className="form-control blue reg-input"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
@@ -84,10 +89,10 @@ export default function Login() {
             </div>
 
             <div className="mb-3">
-              <label className="form-label">Password</label>
+              <label className="form-label login-label">Password</label>
               <input
                 type="password"
-                className="form-control"
+                className="form-control blue reg-input"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
@@ -97,7 +102,7 @@ export default function Login() {
 
             <button
               type="submit"
-              className="btn btn-primary w-100"
+              className="btn w-100 login-btn"
               disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}

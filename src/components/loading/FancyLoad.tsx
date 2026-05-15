@@ -2,13 +2,13 @@ import {useState, useEffect} from 'react';
 
 //components
 import GlobalModal from '../modals/GlobalModal';
-import DynamicDiv from '../containers/DynamicDiv';
+import DynamicDiv from '../DynamicDiv';
 import LoadingAnimation from './LoadingAnimation';
 import DynamicHead from '../h/DynamicHead';
 import LabelledP from '../p/LabelledP';
 
 //interfaces
-import User from '@/interfaces/user';
+import type User from '../../interfaces/user';
 
 export default  function FancyLoad() {
   const [user, setUser] = useState<User>();
@@ -33,23 +33,6 @@ export default  function FancyLoad() {
                           backgroundColor:'#FFFFFF'
                         }}  
       >
-
-        <DynamicDiv>
-          <DynamicHead text={t('loading')}
-                       style={{
-                                marginTop:'20px'
-                             }}
-          />
-          <LoadingAnimation className='my-auto' 
-                            style={{
-                                    marginTop:'50px',
-                                    marginBottom:'100px'
-                                  }}
-          />
-          <LabelledP label={'Reg Type')} 
-                     text={user?.RegType}
-          />
-        </DynamicDiv>
       </DynamicDiv>
     </GlobalModal>
   )

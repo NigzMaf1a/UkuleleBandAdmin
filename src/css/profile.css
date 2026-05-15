@@ -1,0 +1,81 @@
+.prof-style:hover{
+    background: linear-gradient(180deg,  #0000A0, white);
+    font-style: italic;
+    color: black;
+}
+
+.profile{
+    width:300px;
+    height: 500px;
+    background: linear-gradient(180deg,  blue, white);
+}
+
+.profile:hover{
+    background-color: whitesmoke;
+}
+
+.profile-item{
+    border-radius: 4px;
+    cursor: pointer;
+    color:gray;
+    border-bottom: 1px solid #15317E;
+    background-color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+.edit-profile:hover{
+    background-color:#AF7817;
+    color: white;
+    border-bottom: 0;
+    box-shadow: 0 2px 4px 0 #AF7817;
+}
+
+.switch-user:hover{
+    background-color: green;
+    color:white;
+    border-bottom: 0;
+    box-shadow: 0 2px 4px 0 green;
+}
+
+.logout:hover{
+    background-color:#E41B17;
+    color: white;
+    border-bottom: 0;
+    box-shadow: 0 2px 4px 0 #E41B17;
+}
+
+@keyframes flashy {
+  0% {
+    transform: scale(1);
+    border: 1px solid crimson;
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    border: 1px solid maroon;
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    border: 1px solid red;
+    opacity: 1;
+  }
+}
+
+.profile-close{
+    border:1px solid red;
+    background-color: white;
+    width:'50px';
+    height:'30px';
+    color:red;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    animation: flashy 2s ease-in-out infinite;
+}
+
+.profile-close:hover{
+    background-color: red;
+    color: white;
+    animation: none;
+}

@@ -4,13 +4,16 @@ const BASE_URL = link;
 
 export default async function apiFetch<T>(
   endpoint: string,
-  options: RequestInit = {}
+  options: RequestInit = {},
+  skipAuth = false
 ): Promise<T> {
+
   const fullUrl = `${BASE_URL.replace(/\/$/, '')}/${endpoint.replace(/^\//, '')}`;
 
-  // Get token from localStorage (or cookie, etc.)
-  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-  console.log(`Token from fetch: ${token}`)
+  const token =
+    !skipAuth && typeof window !== 'undefined'
+      ? localStorage.getItem('token')
+      : null;
 
   const res = await fetch(fullUrl, {
     ...options,

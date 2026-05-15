@@ -1,36 +1,3 @@
-.menu{
-    background-color:'blue';
-    border:'1px solid blue';
-}
-
-.close{
-    border-radius: 5px;
-}
-
-.close:hover{
-    border: 2px solid red;
-    color: red;
-}
-
-.navigation-item{
-    color: white;
-    border-bottom: 1px;
-}
-
-.navigation-div{
-    border-bottom: 1px solid rgba(0, 0, 50, 0.8);
-    border-radius: 15px;
-}
-
-.navigation-div:hover{
-    border-bottom: 1px solid white;
-    border-left: 3px solid white;
-    color: blue;
-    z-index: 2;
-    box-shadow: 1px 2px 4px 0 #4C787E;
-    cursor: pointer;
-}
-
 .informer{
     position:fixed;
     top: 70px;
@@ -61,16 +28,42 @@
     color: #1589FF;
 }
 
-.profile-item{
-    border-radius: 4px;
-}
-
-.profile-item:hover{
-    border-bottom: 3px solid yellow;
-}
-
 .informer-kids{
     position: relative;
     width: 100%;
     height: 100%;
+}
+
+.switch-user-btn-cont{
+    width: 200px;
+}
+
+.switch-user-btn{
+    width: 55px;
+    height: 35px;
+    border: 1px solid;
+}
+
+.switch-user-btn-login{
+    border-color: green;
+    color: green;
+}
+
+.switch-user-btn-login:hover{
+    background-color: green;
+    color: white;
+}
+
+.switch-user-btn-close{
+    border-color: red;
+    color: red;
+}
+
+.switch-user-btn-close:hover{
+    background-color: red;
+    color: white;
+}
+
+.golden-rod{
+    background-color: #AF7817;
 }

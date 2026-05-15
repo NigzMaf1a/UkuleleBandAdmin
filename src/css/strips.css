@@ -1,0 +1,13 @@
+.strip-add-user-text{
+    color: #151B8D;
+    font-style: italic;
+}
+
+.strip-add-user-text:hover{
+    font-weight: bold;
+}
+
+.brand{
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+}

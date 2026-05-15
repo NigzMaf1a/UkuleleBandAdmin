@@ -23,7 +23,7 @@ const DynamicDropdown: React.FC<DropdownProps> = ({
 
   return (
     <select
-      className={`form-select ${className}`}
+      className={`form-select reg-input ${className}`}
       style={style}
       defaultValue={defaultValue || ""}
       onChange={handleChange}

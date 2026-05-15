@@ -1,0 +1,88 @@
+/*Card Body*/
+.user-card{
+  cursor: pointer;
+  font-style: italic;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/*Animations*/
+
+@keyframes flashy-green {
+  0% {
+    transform: scale(1);
+    background: green;
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    background: green;
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    background: green;
+    opacity: 1;
+  }
+}
+
+@keyframes flashy-red {
+  0% {
+    transform: scale(1);
+    background: red;
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    background: red;
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    background: red;
+    opacity: 1;
+  }
+}
+
+@keyframes flashy-golden-rod {
+  0% {
+    transform: scale(1);
+    background: #AF7817;
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    background: #AF7817;
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    background: #AF7817;
+    opacity: 1;
+  }
+}
+
+/*Styles*/
+.approve-user-btn{
+    animation: flashy-green 2s ease-in-out infinite;
+}
+
+.deactivate-user-btn{
+    animation: flashy-red 2s ease-in-out infinite;
+}
+
+.reactivate-user-btn{
+    animation: flashy-golden-rod 2s ease-in-out infinite;
+}
+
+/*Hover styles*/
+.approve-user-btn:hover{
+    animation: none;
+}
+
+.deactivate-user-btn:hover{
+    animation: none;
+}
+
+.reactivate-user-btn:hover{
+    animation: none;
+}
