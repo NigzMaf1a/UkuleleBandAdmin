@@ -41,7 +41,7 @@ interface RepProps{
 function Dash({users}:DashProps){
   return(
     <DynamicDiv className="informer-kids">
-      {users ? users.map((user) => <InformerItem key={user.RegID} label1="Name:" label2="Email:" text1={user.Name} text2={user.Email} text3={user.accStatus}/>) :  <NoteOne text='No registered users'/>}
+      {users ? users.map((user) => <InformerItem key={user.regid} label1="Name:" label2="Email:" text1={user.Name} text2={user.Email} text3={user.accStatus}/>) :  <NoteOne text='No registered users'/>}
     </DynamicDiv>
   );
 }
@@ -49,7 +49,7 @@ function Dash({users}:DashProps){
 function Acc({users}:AccProps){
   return(
     <DynamicDiv className="informer-kids">
-      {users ? users.map((user) => <InformerItem key={user.RegID} label1="Name:" label2="Email:" text1={user.Name} text2={user.Email} text3={user.RegType}/>) :  <NoteOne text='No registered users'/>}
+      {users ? users.map((user) => <InformerItem key={user.regid} label1="Name:" label2="Email:" text1={user.Name} text2={user.Email} text3={user.RegType}/>) :  <NoteOne text='No registered users'/>}
     </DynamicDiv>
   );
 }
@@ -71,7 +71,7 @@ function Rep({store}:RepProps){
 function Feed({feedback}:InformerProps){
   return(
     <DynamicDiv className="informer-kids">
-      {feedback ? <InformerItem label1={feedback.Name} label2={feedback.Comments} text1={feedback.Response} text2={feedback.Rating}/>: <NoteOne text='No feedback yet'/>}
+      {feedback ? <InformerItem label1={feedback.Name} label2={feedback.Comments} text1={String(feedback.Response} text2={feedback.Rating)}/>: <NoteOne text='No feedback yet'/>}
     </DynamicDiv>
   );
 }

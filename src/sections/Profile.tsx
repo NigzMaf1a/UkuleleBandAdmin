@@ -27,7 +27,7 @@ export default function Profile({user, callback1, callback2, callback3, callback
 
   return (
     <GlobalModal>
-        <DynamicDiv   className="d-flex flex-column justify-content-center align-items-center px-3 py-3 gap-2 profile prof-style"
+        <DynamicDiv   className="align-items-center d-flex flex-column gap-2 justify-content-center prof-style profile px-3 py-3"
           onMouseEnter={toggleMousePresence}
           onMouseLeave={toggleMousePresence}  
         >
@@ -38,18 +38,18 @@ export default function Profile({user, callback1, callback2, callback3, callback
                                 }}  
             />
 
-            <DynamicDiv className="d-flex flex-column justify-content-center align-items-center my-2"
+            <DynamicDiv className="align-items-center d-flex flex-column justify-content-center my-2"
                         style={{
                                 width:'100%'
                               }}  
             >
-                <LabelledP2 label={'Name:'} text={user.Name}/>
-                <LabelledP2 label={'Email:'} text={user.Email}/>
-                <LabelledP2 label={'Reg Type:'} text={user.RegType}/>
+                <LabelledP2 label={'Name:'} text={user.name}/>
+                <LabelledP2 label={'Email:'} text={user.email}/>
+                <LabelledP2 label={'Reg Type:'} text={user.regtype}/>
 
             </DynamicDiv>
 
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center px-2 profile-item edit-profile"
+            <DynamicDiv className="align-items-center d-flex edit-profile flex-row justify-content-between profile-item px-2"
                         style={{
                                 width:'100%',
                                 height:'30px'
@@ -59,7 +59,7 @@ export default function Profile({user, callback1, callback2, callback3, callback
                 Edit Profile
             </DynamicDiv>
 
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center px-2 profile-item switch-user"
+            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between profile-item px-2 switch-user"
                         onClick={callback3}
                         style={{
                                 width:'100%',
@@ -69,7 +69,7 @@ export default function Profile({user, callback1, callback2, callback3, callback
                 Switch User
             </DynamicDiv>
 
-            <DynamicDiv className="d-flex flex-row justify-content-between align-items-center px-2 profile-item logout"
+            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between logout profile-item px-2"
                         onClick={callback4}
                         style={{
                                 width:'100%',
@@ -81,7 +81,7 @@ export default function Profile({user, callback1, callback2, callback3, callback
 
             <DynamicButton label="Close"
                            onClick={callback1}
-                           className="mt-4 close profile-close"
+                           className="close mt-4 profile-close"
             />                                                                   
         </DynamicDiv>
     </GlobalModal>
