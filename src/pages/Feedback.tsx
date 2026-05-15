@@ -12,10 +12,10 @@ import link from "../scripts/services/utils/links";
 export interface FeedbackRow {
   FeedbackID: number;
   CustomerID: number;
-  Name: string;
-  Comments: string | null;
-  Response: string | null;
-  Rating: number;
+  name: string;
+  comments: string | null;
+  response: string | null;
+  rating: number;
 }
 
 export default function Feedback() {
@@ -61,7 +61,7 @@ export default function Feedback() {
       // Update locally
       setFeedbacks((prev) =>
         prev.map((f) =>
-          f.FeedbackID === feedback.FeedbackID ? { ...f, Response: newResponse } : f
+          f.FeedbackID === feedback.FeedbackID ? { ...f, response: newResponse } : f
         )
       );
       setEditingId(null);
@@ -92,11 +92,11 @@ export default function Feedback() {
                 <div style={{ flex: 1, minWidth: "200px", marginRight: "20px" }}>
                   <h5 className="feed-name">Name: {fb.name}</h5>
                   <p className="comment">Comment: {fb.comments}</p>
-                  <p>Rating: {fb.Rating} / 5</p>
+                  <p>Rating: {fb.rating} / 5</p>
                 </div>
 
                 <div style={{ flex: 1, minWidth: "200px" }} className="align-items-center d-flex justify-content-center mx-auto my-auto">
-                  {fb.Response ? (
+                  {fb.response ? (
                     <p className="response">
                       <strong>Response:</strong> {fb.response}
                     </p>

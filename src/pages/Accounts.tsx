@@ -11,10 +11,10 @@ import link from "../scripts/services/utils/links";
 
 interface User {
   RegID: number;
-  Name: string;
-  Email: string;
-  Gender: "Male" | "Female";
-  RegType:
+  name: string;
+  email: string;
+  gender: "Male" | "Female";
+  regtype:
     | "Customer"
     | "DJ"
     | "Mcee"
@@ -25,13 +25,13 @@ interface User {
     | "Band"
     | "Admin"
     | "Supplier";
-  accStatus: "Pending" | "Approved" | "Inactive";
+  accstatus: "Pending" | "Approved" | "Inactive";
 }
 
 export default function Accounts() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
