@@ -38,7 +38,7 @@ export default function SwitchUser({callback1, callback2}:SwitchUserProps) {
         throw new Error("Invalid server response");
       }
 
-      if(user.RegType !== 'Admin'){
+      if(user.regtype !== 'Admin'){
         toast.error('Invalid registration type. Only admins can login here.');
         setEmail('');
         setPassword('');
@@ -54,7 +54,7 @@ export default function SwitchUser({callback1, callback2}:SwitchUserProps) {
       callback2();
 
       setTimeout(()=>{
-        switch (user.RegType) {
+        switch (user.regtype) {
           case "Admin":
             navigate("/dashboard");
             break;
@@ -90,7 +90,7 @@ export default function SwitchUser({callback1, callback2}:SwitchUserProps) {
                             height:'500px',
                             backgroundColor:'#ffffff'
                            }}
-                    className="d-flex flex-column justify-content-center align-items-center px-3 py-3 gap-2 "  
+                    className="align-items-center d-flex flex-column gap-2 justify-content-center px-3 py-3"  
         >
 
             <RoundedImage src={'/vite.svg'}
@@ -100,7 +100,7 @@ export default function SwitchUser({callback1, callback2}:SwitchUserProps) {
                                    border:'1px solid blue'
                                 }}  
             />      
-            <DynamicDiv className="d-flex flex-column justify-content-center align-items-center gap-2">
+            <DynamicDiv className="align-items-center d-flex flex-column gap-2 justify-content-center">
 
               <LabelledInput
                   label="Email" 
@@ -118,7 +118,7 @@ export default function SwitchUser({callback1, callback2}:SwitchUserProps) {
                   type="password"
               />
 
-              <DynamicDiv className="d-flex flex-row justify-content-between align-items-center switch-user-btn-cont mx-auto">
+              <DynamicDiv className="align-items-center d-flex flex-row justify-content-between mx-auto switch-user-btn-cont">
                 <DynamicButton label="Login" className="switch-user-btn switch-user-btn-login" onClick={logUser}/>
                 <DynamicButton label="Close" className="switch-user-btn switch-user-btn-close" onClick={callback2}/>
               </DynamicDiv>
