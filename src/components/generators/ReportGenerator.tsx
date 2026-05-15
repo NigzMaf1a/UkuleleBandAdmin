@@ -31,7 +31,7 @@ export default function ReportGenerator() {
       return;
     }    
     if(user && token)(()=>{
-      const admin = new Admin(user.RegID, token);
+      const admin = new Admin(user.regid, token);
       setThisAdmin(admin);
     })();
   }, [navigate]);  
@@ -46,7 +46,7 @@ export default function ReportGenerator() {
 
   console.log('Store dem:', store);
 
-  const mapStore = useMemo(()=>{
+  const mapStore: React.ReactNode = useMemo(()=>{
 
     if(store.length === 0)((equipz:Inventory[])=>{
       equipz.map((equip, idx)=>(
