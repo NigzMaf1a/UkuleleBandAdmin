@@ -3,15 +3,15 @@ export type accStatus = 'Pending' | 'Approved' | 'Inactive';
 export type regType = 'Customer' | 'Accountant' | 'Admin' | 'Supplier';
 
 export default interface User{
-    regid:number;
-    name:string;
-    phoneno:string;
-    email:string;
-    password:string;
-    gender:gender;
-    regtype:regType;
+    RegId:number;
+    Name:string;
+    PhoneNo:string;
+    Email:string;
+    Password:string;
+    Gender:gender;
+    RegType:regType;
     dlocation:string;
-    photo:Blob;
+    photo:string;
     accstatus:accStatus;
 }
 
