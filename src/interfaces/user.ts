@@ -10,14 +10,14 @@ export default interface User{
     Password:string;
     Gender:gender;
     RegType:regType;
-    dlocation:string;
-    photo:string;
-    accstatus:accStatus;
+    dLocation:string;
+    Photo:string;
+    accStatus:accStatus;
 }
 
 export interface UserPayload{
-    name?:string;
-    phoneno?:string;
+    Name?:string;
+    PhoneNo?:string;
     Email?:string;
     Password?:string;
     Gender?:string;
