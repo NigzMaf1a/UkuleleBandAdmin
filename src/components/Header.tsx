@@ -25,57 +25,14 @@ export default function Header({brand}:headerProps) {
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
   const [thisBrand, setThisBrand] = useState(brand);
-  // const [mouseEntered, setMouseEntered] = useState<boolean>(false);
-  // const [nav, setNav] = useState<number>(0);
   const [thisAdmin, setThisAdmin] = useState<Admin>();
-  const [setFeed] = useState<Feedback[]>([]);
+  const [feed, setFeed] = useState<Feedback[]>([]);
 
   //Hover values state
   const [users, setUsers] = useState<User[]>([]);
   const [about, setAbout] = useState<About>();
-  // const [store, setStore] = useState<Inventory[]>([]);
   
   const navigate = useNavigate();
-
-  // function toggleMousePresence(){
-  //   setMouseEntered(prev => !prev);
-  // }
-
-  // function nav1(){
-  //   if(mouseEntered){
-  //     setNav(1);
-  //   }
-  // }
-
-  // function nav2(){
-  //   if(mouseEntered){
-  //     setNav(2);
-  //   }
-  // }
-
-  // function nav3(){
-  //   if(mouseEntered){
-  //     setNav(3);
-  //   }
-  // }
-
-  // function nav4(){
-  //   if(mouseEntered){
-  //     setNav(4);
-  //   }
-  // }
-
-  // function nav5(){
-  //   if(mouseEntered){
-  //     setNav(5);
-  //   }
-  // }
-
-  // function resetNav(){
-  //   if(!mouseEntered || nav !== 0){
-  //     setNav(0);
-  //   }
-  // }
 
   useEffect(()=>{
     setThisBrand(brand);
