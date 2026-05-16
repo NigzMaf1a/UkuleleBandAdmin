@@ -28,8 +28,9 @@ export default function Login() {
       if (!token || !user) {
         throw new Error("Invalid server response");
       }
+      
 
-      if(user.regtype !== 'Admin'){
+      if(user.RegType !== 'Admin'){
         toast.error('Invalid registration type. Only admins can login here.');
         setEmail('');
         setPassword('');
@@ -43,7 +44,7 @@ export default function Login() {
       toast.success('Login Successful!!!');
 
       setTimeout(()=>{
-        switch (user.regtype) {
+        switch (user.RegType) {
           case "Admin":
             navigate("/dashboard");
             break;
