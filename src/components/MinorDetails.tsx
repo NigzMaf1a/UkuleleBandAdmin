@@ -10,8 +10,8 @@ interface DynamicDivProps {
   src: string;
   label1:string;
   label2:string;
-  text1:string | number | undefined;
-  text2:string | number | undefined;
+  text1:string | number;
+  text2:string | number;
   text3?:string | number;
   children: ReactNode;
   onClick?: () => void;

@@ -3,7 +3,7 @@ import DynamicP from './DynamicP';
 import DynamicDiv from '../DynamicDiv';
 
 interface Props {
-  text: string;
+  text: string | number;
   label: string ;
   className?: string;
   style?: React.CSSProperties;
