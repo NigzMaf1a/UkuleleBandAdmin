@@ -30,8 +30,8 @@ export default function SwitchUser({callback1, callback2}:SwitchUserProps) {
 
     try {
       const { token, user } = await loginUser({
-        email,
-        password,
+        Email:email,
+        Password:password,
       });
 
       if (!token || !user) {

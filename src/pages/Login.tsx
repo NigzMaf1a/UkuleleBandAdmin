@@ -21,8 +21,8 @@ export default function Login() {
 
     try {
       const { token, user } = await loginUser({
-        email,
-        password,
+        Email:email,
+        Password:password,
       });
 
       if (!token || !user) {
