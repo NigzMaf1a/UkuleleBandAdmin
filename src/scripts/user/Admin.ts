@@ -182,8 +182,8 @@ export default class Admin {
     });
   }
 
-  async loggedInAdmin(userID:number):Promise<User[]>{
-    return this.apiFetch<User[]>(`${endpoints.loggedUser}/${userID}`, {
+  async loggedInAdmin(userID: number): Promise<User> {
+    return this.apiFetch<User>(`${endpoints.loggedUser}/${userID}`, {
       headers: { "Content-Type": "application/json" },
     });
   }
