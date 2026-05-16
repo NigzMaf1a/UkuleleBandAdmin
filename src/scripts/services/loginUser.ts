@@ -7,8 +7,8 @@ interface LoginResponse {
 }
 
 interface LogginCreds{
-    email:string;
-    password:string;
+    Email:string;
+    Password:string;
 }
 export default async function loginUser(creds: LogginCreds): Promise<LoginResponse> {
   try {
