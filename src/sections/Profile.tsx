@@ -43,9 +43,9 @@ export default function Profile({user, callback1, callback2, callback3, callback
                                 width:'100%'
                               }}  
             >
-                <LabelledP2 label={'Name:'} text={user.name}/>
-                <LabelledP2 label={'Email:'} text={user.email}/>
-                <LabelledP2 label={'Reg Type:'} text={user.regtype}/>
+                <LabelledP2 label={'Name:'} text={user.Name}/>
+                <LabelledP2 label={'Email:'} text={user.Email}/>
+                <LabelledP2 label={'Reg Type:'} text={user.RegType}/>
 
             </DynamicDiv>
 

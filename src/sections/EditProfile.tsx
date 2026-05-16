@@ -41,7 +41,7 @@ export default function EditProfile({user, callback1}:EditProfileProps) {
       return;
     }    
     if(user && token)(()=>{
-      const admin = new Admin(user.regid, token);
+      const admin = new Admin(user.RegId, token);
       setThisAdmin(admin);
     })();
   }, [navigate]);  
@@ -58,7 +58,7 @@ export default function EditProfile({user, callback1}:EditProfileProps) {
 
     const validPassword = validatePassword(password, confirmPassword);
     const user:UserPayload = {
-      phoneno:phone, 
+      PhoneNo:phone, 
       Email:email,
       Password:validPassword
     };
@@ -87,28 +87,28 @@ export default function EditProfile({user, callback1}:EditProfileProps) {
                     label="Phone"
                     value={phone}
                     onChange={setPhone}
-                    placeholder={user.phoneno}
+                    placeholder={user.PhoneNo}
                     type="text"
                 />
                 <LabelledInput
                     label="Email"
                     value={email}
                     onChange={setEmail}
-                    placeholder={user.email}
+                    placeholder={user.Email}
                     type="text"
                 />
                 <LabelledInput
                     label="Password"
                     value={password}
                     onChange={setPassword}
-                    placeholder={user.password}
+                    placeholder={user.Password}
                     type="password"
                 />
                 <LabelledInput
                     label="Confirm Password"
                     value={confirmPassword}
                     onChange={setConfirmPassword}
-                    placeholder={user.password}
+                    placeholder={user.Password}
                     type="password"
                 />
               </DynamicDiv>

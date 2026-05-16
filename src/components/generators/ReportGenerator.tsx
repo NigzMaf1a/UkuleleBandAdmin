@@ -31,7 +31,7 @@ export default function ReportGenerator() {
       return;
     }    
     if(user && token)(()=>{
-      const admin = new Admin(user.regid, token);
+      const admin = new Admin(user.RegId, token);
       setThisAdmin(admin);
     })();
   }, [navigate]);  

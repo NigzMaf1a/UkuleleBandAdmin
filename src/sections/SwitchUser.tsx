@@ -38,7 +38,7 @@ export default function SwitchUser({callback1, callback2}:SwitchUserProps) {
         throw new Error("Invalid server response");
       }
 
-      if(user.regtype !== 'Admin'){
+      if(user.RegType !== 'Admin'){
         toast.error('Invalid registration type. Only admins can login here.');
         setEmail('');
         setPassword('');
@@ -54,7 +54,7 @@ export default function SwitchUser({callback1, callback2}:SwitchUserProps) {
       callback2();
 
       setTimeout(()=>{
-        switch (user.regtype) {
+        switch (user.RegType) {
           case "Admin":
             navigate("/dashboard");
             break;

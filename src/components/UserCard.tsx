@@ -34,8 +34,8 @@ export default function UserCard({
            onClick={toggleModal}
       >
         <Col xs={8}>
-          <h6 className="fw-bold mb-1">{user.name}</h6>
-          <small className="text-muted">{user.email}</small>
+          <h6 className="fw-bold mb-1">{user.Name}</h6>
+          <small className="text-muted">{user.Email}</small>
         </Col>
         <Col xs={4} className="text-end">
           <Button variant={buttonVariant} size="sm" onClick={onAction} className={`${className4Button}`}>
