@@ -46,7 +46,7 @@ export default function RegModal({callback2}:RegModalProps) {
     console.log('User:', user);
    
     if(user && token)(()=>{
-      const admin = new Admin(user.RegID, token);
+      const admin = new Admin(user.RegId, token);
       setThisAdmin(admin);
     })();
   }, []);

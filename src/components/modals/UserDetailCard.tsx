@@ -18,7 +18,7 @@ export default function UserDetailCard({callback1, user}:DetailProps) {
     <GlobalModal>
         <DynamicDiv className="align-items-center d-flex detail-body flex-column gap-3 justify-content-center">
             <DynamicDiv className="detail-image">
-                <RoundedImage src={user.photo ||'/nzaumi.jpg'}/>
+                <RoundedImage src={user.Photo ||'/nzaumi.jpg'}/>
             </DynamicDiv>
 
             <DynamicDiv className="align-items-center d-flex flex-column gap-1 justify-content-center">
@@ -48,14 +48,14 @@ export default function UserDetailCard({callback1, user}:DetailProps) {
                 />
 
                 <LabelledDynamicP label="Location:" 
-                                  text={user.dlocation}
+                                  text={user.dLocation}
                                   classNameDiv="detail-item-div"
                 />
 
                 <LabelledDynamicP label="Acc Status:" 
-                                  text={user.accstatus}
+                                  text={user.accStatus}
                                   classNameDiv="detail-item-div"
-                                  classNameText={`${user.accstatus==='Pending' ? 'goldenrod' : user.accstatus==='Approved' ? 'green' : 'red'} `}
+                                  classNameText={`${user.accStatus==='Pending' ? 'goldenrod' : user.accStatus==='Approved' ? 'green' : 'red'} `}
                 />
             </DynamicDiv>
 

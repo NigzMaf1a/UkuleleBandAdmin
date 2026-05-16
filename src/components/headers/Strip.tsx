@@ -81,7 +81,7 @@ function Strip({title}:StripProps) {
       return;
     }    
     if(user && token)(()=>{
-      const admin = new Admin(user.RegID, token);
+      const admin = new Admin(user.RegId, token);
       setThisAdmin(admin);
     })();
   }, [navigate]);
@@ -90,7 +90,7 @@ function Strip({title}:StripProps) {
     const userString = localStorage.getItem('user');
     const user: User | null = userString ? JSON.parse(userString) : null;
     if(thisAdmin && user)(async ()=>{
-      const loggedAdmin:User = await thisAdmin.loggedInAdmin(user.RegID);
+      const loggedAdmin:User = await thisAdmin.loggedInAdmin(user.RegId);
       console.log('Logged in admin:', loggedAdmin);
       setUserData(loggedAdmin);
     })();
