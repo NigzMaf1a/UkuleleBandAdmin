@@ -64,7 +64,7 @@ export default function Dashboard() {
           buttonText="Approve"
           buttonVariant="success"
           className4Button="approve-user-btn"
-          onAction={() => thisAdmin? thisAdmin.approveUser(user.regid) : console.error('No Logged in Admin')}
+          onAction={() => thisAdmin? thisAdmin.approveUser(user.RegId) : console.error('No Logged in Admin')}
         />
       )),
     [pending, thisAdmin]
@@ -79,7 +79,7 @@ export default function Dashboard() {
           buttonText="Deactivate"
           buttonVariant="danger"
           className4Button="deactivate-user-btn"
-          onAction={() => thisAdmin? thisAdmin.deactivateUser(user.regid) : console.error('No Logged in Admin')}
+          onAction={() => thisAdmin? thisAdmin.deactivateUser(user.RegId) : console.error('No Logged in Admin')}
         />
       )),
     [approved, thisAdmin]
@@ -94,7 +94,7 @@ export default function Dashboard() {
           buttonText="Reactivate"
           buttonVariant="warning"
           className4Button="reactivate-user-btn"
-          onAction={() => thisAdmin ? thisAdmin.reactivateUser(user.regid) : console.error('No Logged in Admin')}
+          onAction={() => thisAdmin ? thisAdmin.reactivateUser(user.RegId) : console.error('No Logged in Admin')}
         />
       )),
     [inactive, thisAdmin]

@@ -3,7 +3,7 @@ import React from 'react';
 // interfaces and types
 
 interface Props {
-  text: string;
+  text: string | number;
   className?: string;
   style?: React.CSSProperties;
 }
