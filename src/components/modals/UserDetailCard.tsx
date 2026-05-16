@@ -23,27 +23,27 @@ export default function UserDetailCard({callback1, user}:DetailProps) {
 
             <DynamicDiv className="align-items-center d-flex flex-column gap-1 justify-content-center">
                 <LabelledDynamicP label="Name:" 
-                                  text={user.name}
+                                  text={user.Name}
                                   classNameDiv="detail-item-div"
                 />
 
                 <LabelledDynamicP label="Phone No:" 
-                                  text={String(user.phoneno)}
+                                  text={String(user.PhoneNo)}
                                   classNameDiv="detail-item-div"
                 />
 
                 <LabelledDynamicP label="Email:" 
-                                  text={user.email}
+                                  text={user.Email}
                                   classNameDiv="detail-item-div"
                 />
 
                 <LabelledDynamicP label="Gender:" 
-                                  text={user.gender}
+                                  text={user.Gender}
                                   classNameDiv="detail-item-div"
                 />
 
                 <LabelledDynamicP label="Reg Type:" 
-                                  text={user.regtype}
+                                  text={user.RegType}
                                   classNameDiv="detail-item-div"
                 />
 
