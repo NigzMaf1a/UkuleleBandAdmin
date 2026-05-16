@@ -17,143 +17,178 @@ import Admin from "../../scripts/user/Admin";
 
 //interface
 import type User from "../../interfaces/user";
-interface StripProps{
-    title:string;
+
+interface StripProps {
+  title: string;
 }
 
-function Strip({title}:StripProps) {
+function Strip({ title }: StripProps) {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showModal2, setShowModal2] = useState<boolean>(false);
   const [showModal3, setShowModal3] = useState<boolean>(false);
-  const [thisAdmin, setThisAdmin] = useState<Admin>();
-  const [userData, setUserData] = useState<User>();
-  const [mode, setMode] = useState<'light' | 'dark'>('light');
-  const [light, setLight] = useState<boolean>(false);
-  const [dark, setDark] = useState<boolean>(false);
+
+  const [thisAdmin, setThisAdmin] = useState<Admin | null>(null);
+
+  // FIX: userData can start as null
+  const [userData, setUserData] = useState<User | null>(null);
+
+  const [mode, setMode] = useState<"light" | "dark">("light");
+
+  // FIX: removed unused dark state
+  const [light, setLight] = useState<boolean>(true);
+
   const navigate = useNavigate();
 
   function toggleModal() {
-    setShowModal(prev => !prev);
+    setShowModal((prev) => !prev);
   }
 
   function toggleModalTwo() {
-    setShowModal2(prev => !prev);
+    setShowModal2((prev) => !prev);
   }
 
   function toggleModalThree() {
-    setShowModal3(prev => !prev);
+    setShowModal3((prev) => !prev);
   }
 
-  function toggleMode(){
-    if(mode === 'light') setMode('dark');
-    if(mode === 'dark') setMode('light');
+  function toggleMode() {
+    setMode((prev) => (prev === "light" ? "dark" : "light"));
   }
 
-  useEffect(()=>{
-    if(mode === 'light'){
-      setLight(true);
-      setDark(false);
-    }
+  useEffect(() => {
+    setLight(mode === "light");
 
-    if(mode === 'dark'){
-      setLight(false);
-      setDark(true);
-    }   
-    console.log(mode); 
+    console.log(mode);
   }, [mode]);
 
+  async function logOutUser() {
+    localStorage.clear();
 
-  async function logOutUser(){
-    await localStorage.clear();
-    toast.success('Log out successful!');
-    setTimeout(()=>{navigate('/login')}, 3000)
+    toast.success("Log out successful!");
+
+    setTimeout(() => {
+      navigate("/login");
+    }, 3000);
   }
 
-  useEffect(()=>{
-    const token = localStorage.getItem('token');
-    const userString = localStorage.getItem('user');
-    const user: User | null = userString ? JSON.parse(userString) : null;
-    console.log('Token:', token);
-    console.log('User:', user);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    const userString = localStorage.getItem("user");
+
+    const user: User | null = userString
+      ? JSON.parse(userString)
+      : null;
+
+    console.log("Token:", token);
+    console.log("User:", user);
 
     if (!token) {
-      navigate('/login');
+      navigate("/login");
       return;
-    }    
-    if(user && token)(()=>{
+    }
+
+    if (user && token) {
       const admin = new Admin(user.RegId, token);
+
       setThisAdmin(admin);
-    })();
+    }
   }, [navigate]);
 
-  useEffect(()=>{
-    const userString = localStorage.getItem('user');
-    const user: User | null = userString ? JSON.parse(userString) : null;
-    if(thisAdmin && user)(async ()=>{
-      const loggedAdmin:User = await thisAdmin.loggedInAdmin(user.RegId);
-      console.log('Logged in admin:', loggedAdmin);
-      setUserData(loggedAdmin);
-    })();
+  useEffect(() => {
+    const fetchAdmin = async () => {
+      const userString = localStorage.getItem("user");
+
+      const user: User | null = userString
+        ? JSON.parse(userString)
+        : null;
+
+      if (thisAdmin && user) {
+        // FIX: remove incorrect User[] typing
+        const loggedAdmin = await thisAdmin.loggedInAdmin(user.RegId);
+
+        console.log("Logged in admin:", loggedAdmin);
+
+        setUserData(loggedAdmin);
+      }
+    };
+
+    fetchAdmin();
   }, [thisAdmin]);
 
   return (
     <>
-      <DynamicDiv style={{
-                          color:'#FFFFFF',
-                          height:'70px',
-                          backgroundColor:'#15317E'
-                        }}
-                  className="d-flex flex-row justify-content-between align-items-center w-100 px-3"
+      <DynamicDiv
+        style={{
+          color: "#FFFFFF",
+          height: "70px",
+          backgroundColor: "#15317E",
+        }}
+        className="d-flex flex-row justify-content-between align-items-center w-100 px-3"
       >
-        <DynamicDiv className="d-flex flex-column justify-content-center align-items-center bg-white rounded-circle"
-                    onClick={toggleModal}
-                    style={{
-                            height:'30px',
-                            width:'30px',
-                            cursor:'pointer'
-                          }}  
-        > 
-          <RoundedImage style={{
-                                height:'40px',
-                                width:'40px',
-                                color:'white',
-                                backgroundColor:'white'
-                              }}
-                        src={'/account.svg'}
+        <DynamicDiv
+          className="d-flex flex-column justify-content-center align-items-center bg-white rounded-circle"
+          onClick={toggleModal}
+          style={{
+            height: "30px",
+            width: "30px",
+            cursor: "pointer",
+          }}
+        >
+          <RoundedImage
+            style={{
+              height: "40px",
+              width: "40px",
+              color: "white",
+              backgroundColor: "white",
+            }}
+            src={"/account.svg"}
           />
         </DynamicDiv>
-        <DynamicP text={title} className="tag"/>
-        <DynamicDiv className="d-flex flex-column justify-content-center align-items-center bg-white rounded-circle"
-                    onClick={toggleMode}
-                    style={{
-                            height:'40px',
-                            width:'40px',
-                            cursor:'pointer',
-                            backgroundColor: light ? 'white' : 'black'
-                          }}  
-        > {light ? 'Light' : 'Dark'}
-          {/* <RoundedImage style={{
-                                height:'40px',
-                                width:'40px'
-                              }}
-                        src={'/vite.svg'}
-          /> */}
+
+        <DynamicP text={title} className="tag" />
+
+        <DynamicDiv
+          className="d-flex flex-column justify-content-center align-items-center bg-white rounded-circle"
+          onClick={toggleMode}
+          style={{
+            height: "40px",
+            width: "40px",
+            cursor: "pointer",
+            backgroundColor: light ? "white" : "black",
+          }}
+        >
+          {light ? "Light" : "Dark"}
         </DynamicDiv>
       </DynamicDiv>
-      {showModal && <Profile user={userData} 
-                             callback1={toggleModal}
-                             callback2={toggleModalTwo}
-                             callback3={toggleModalThree}
-                             callback4={logOutUser}
-                    />
-      }
 
-      {showModal2 && <EditProfile user={userData} callback1={toggleModalTwo}/>
-      }
+      {/* FIX: render only if userData exists */}
+      {showModal && userData && (
+        <Profile
+          user={userData}
+          callback1={toggleModal}
+          callback2={toggleModalTwo}
+          callback3={toggleModalThree}
+          callback4={logOutUser}
+        />
+      )}
 
-      {showModal3 && <SwitchUser callback1={toggleModal} callback2={toggleModalThree}/>}
+      {/* FIX: render only if userData exists */}
+      {showModal2 && userData && (
+        <EditProfile
+          user={userData}
+          callback1={toggleModalTwo}
+        />
+      )}
+
+      {showModal3 && (
+        <SwitchUser
+          callback1={toggleModal}
+          callback2={toggleModalThree}
+        />
+      )}
     </>
-  )
+  );
 }
 
-export default Strip
+export default Strip;
