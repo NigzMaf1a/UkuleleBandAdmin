@@ -41,7 +41,7 @@ export default function EditProfile({user, callback1}:EditProfileProps) {
       return;
     }    
     if(user && token)(()=>{
-      const admin = new Admin(user.RegID, token);
+      const admin = new Admin(user.regid, token);
       setThisAdmin(admin);
     })();
   }, [navigate]);  
@@ -58,7 +58,7 @@ export default function EditProfile({user, callback1}:EditProfileProps) {
 
     const validPassword = validatePassword(password, confirmPassword);
     const user:UserPayload = {
-      PhoneNo:phone, 
+      phoneno:phone, 
       Email:email,
       Password:validPassword
     };
@@ -71,7 +71,7 @@ export default function EditProfile({user, callback1}:EditProfileProps) {
 
   return (
     <GlobalModal>
-        <DynamicDiv className="d-flex flex-column justify-content-center align-items-center px-3 py-3 gap-2 edit-user-profile"  
+        <DynamicDiv className="align-items-center d-flex edit-user-profile flex-column gap-2 justify-content-center px-3 py-3"  
         >
           
             <RoundedImage src={'/vite.svg'}
@@ -82,38 +82,38 @@ export default function EditProfile({user, callback1}:EditProfileProps) {
                                    marginTop:'50px'
                                 }}  
             />    
-              <DynamicDiv className="d-flex flex-column justify-content-between align-items-center mx-auto">
+              <DynamicDiv className="align-items-center d-flex flex-column justify-content-between mx-auto">
                 <LabelledInput
                     label="Phone"
                     value={phone}
                     onChange={setPhone}
-                    placeholder={user.PhoneNo}
+                    placeholder={user.phoneno}
                     type="text"
                 />
                 <LabelledInput
                     label="Email"
                     value={email}
                     onChange={setEmail}
-                    placeholder={user.PhoneNo}
+                    placeholder={user.email}
                     type="text"
                 />
                 <LabelledInput
                     label="Password"
                     value={password}
                     onChange={setPassword}
-                    placeholder={user.Password}
+                    placeholder={user.password}
                     type="password"
                 />
                 <LabelledInput
                     label="Confirm Password"
                     value={confirmPassword}
                     onChange={setConfirmPassword}
-                    placeholder={user.Password}
+                    placeholder={user.password}
                     type="password"
                 />
               </DynamicDiv>
 
-              <DynamicDiv className="d-flex flex-row justify-content-between align-items-center switch-user-btn-cont mx-auto">
+              <DynamicDiv className="align-items-center d-flex flex-row justify-content-between mx-auto switch-user-btn-cont">
                 <DynamicButton label="Close" className="switch-user-btn switch-user-btn-close" onClick={callback1}/>
                 <DynamicButton label="Edit" className="switch-user-btn switch-user-btn-login" onClick={editUser}/>
               </DynamicDiv> 
