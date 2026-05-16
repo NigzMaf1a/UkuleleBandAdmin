@@ -71,6 +71,8 @@ export default function Header({brand}:headerProps) {
 
   console.log('Userz', users);
   console.log('Aboutz', about);
+  console.log(feed);
+  
 
   // Hide for login
   if (location.pathname === "/login") return null;
