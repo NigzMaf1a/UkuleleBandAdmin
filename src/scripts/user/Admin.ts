@@ -188,7 +188,7 @@ export default class Admin {
     });
   }
 
-  async updateAdmin(admin: UserPayload) {
+  async updateAdmin(admin: Partial<User>) {
     return await this.apiFetch(endpoints.updateUser, {
       method: 'PATCH',
       body: JSON.stringify(admin)

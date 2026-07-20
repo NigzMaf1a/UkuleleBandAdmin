@@ -13,7 +13,7 @@ interface AboutItemProps{
 export default function AboutItem({about}:AboutItemProps){
   return(
     <DynamicDiv className="informer-kids">
-        <DynamicP text = {typeof about === "string" ? about : about.Detail}/>
+        <DynamicP text = {typeof about === "string" ? about : about.detail}/>
     </DynamicDiv>
   );
 }
