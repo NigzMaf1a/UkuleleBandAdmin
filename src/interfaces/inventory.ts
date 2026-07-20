@@ -1,8 +1,8 @@
 export default interface Inventory {
-  EquipmentID: number;
-  Price: number;
-  Description: "Speaker" | "Microphone" | "Mixer" | "CDJ" | "Cable" | "Wireless";
-  PurchaseDate: Date;
-  Condition: "CAT1" | "CAT2" | "CAT3" | "CAT4";
-  Availability: "Available" | "Unavailable";
+  equipmentid?: number;
+  price: number;
+  description: 'Speaker' | 'Microphone' | 'CDJ' | 'Mixer' | 'Wireless' | 'Cable';
+  purchasedate: Date;
+  dcondition: 'CAT1' | 'CAT2' | 'CAT3' | 'CAT4';
+  availability: 'Available' | 'Unavailable';
 }

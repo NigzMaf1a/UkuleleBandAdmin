@@ -17,11 +17,11 @@ import type User from "../interfaces/user";
 import type About from "../interfaces/about";
 // import type Inventory from "../interfaces/inventory";
 import type Feedback from "../interfaces/feedback";
-interface headerProps{
-  brand:string;
+interface headerProps {
+  brand: string;
 }
 
-export default function Header({brand}:headerProps) {
+export default function Header({ brand }: headerProps) {
   const [showMenu, setShowMenu] = useState(false);
   const location = useLocation();
   const [thisBrand, setThisBrand] = useState(brand);
@@ -31,14 +31,14 @@ export default function Header({brand}:headerProps) {
   //Hover values state
   const [users, setUsers] = useState<User[]>([]);
   const [about, setAbout] = useState<About>();
-  
+
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     setThisBrand(brand);
   }, [brand]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = localStorage.getItem('token');
     const userString = localStorage.getItem('user');
     const user: User | null = userString ? JSON.parse(userString) : null;
@@ -48,19 +48,19 @@ export default function Header({brand}:headerProps) {
     if (!token) {
       navigate('/login');
       return;
-    }    
-    if(user && token)(()=>{
-      const admin = new Admin(user.RegId, token);
+    }
+    if (user && token) (() => {
+      const admin = new Admin(user.regid as number, token);
       setThisAdmin(admin);
     })();
   }, [navigate]);
 
-  useEffect(()=>{
-    if(thisAdmin)( async ()=>{
+  useEffect(() => {
+    if (thisAdmin) (async () => {
       const u = await thisAdmin.fetchAllUsers();
       const a = await thisAdmin.fetchAbout();
       // const i = await thisAdmin.fetchInventory();
-      const f:Feedback[] = await thisAdmin.fetchFeedback();
+      const f: Feedback[] = await thisAdmin.fetchFeedback();
 
       setUsers(u);
       setAbout(a);
@@ -72,19 +72,19 @@ export default function Header({brand}:headerProps) {
   console.log('Userz', users);
   console.log('Aboutz', about);
   console.log(feed);
-  
+
 
   // Hide for login
   if (location.pathname === "/login") return null;
 
   return (
     <>
-      <Navbar  variant="dark" 
-               className="px-2 py-2 shadow-sm" 
-               style={{
-                       backgroundColor:'#0000A0'
-                     }}   
-               expand={true}>
+      <Navbar variant="dark"
+        className="px-2 py-2 shadow-sm"
+        style={{
+          backgroundColor: '#0000A0'
+        }}
+        expand={true}>
         <Container className="align-items-center justify-content-between">
           <Navbar.Brand href="/" className="brand fw-bold">
             {thisBrand}
@@ -108,80 +108,80 @@ export default function Header({brand}:headerProps) {
         placement="end"
       >
         <DynamicDiv className="h-100" style={{
-                                              backgroundColor:'#15317E',
-                                              color:'white',
-                                              border:'1px solid blue'
-                                            }}
+          backgroundColor: '#15317E',
+          color: 'white',
+          border: '1px solid blue'
+        }}
 
         >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title><DynamicP text="Menu" className="menu-text"/></Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <DynamicDiv style={{
-                              width:'100%',
-                              height:'100%',
-                              color:'white'
-                            }}
-          >
-          <Nav className="flex-column gap-3">
-            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
-                        // onMouseEnter={nav1}
-                        // onMouseLeave={resetNav}
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title><DynamicP text="Menu" className="menu-text" /></Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <DynamicDiv style={{
+              width: '100%',
+              height: '100%',
+              color: 'white'
+            }}
             >
-              <Nav.Link as={Link} to="/dashboard" onClick={() => setShowMenu(false)} className="navigation-item"
-              >
-                <DynamicP text="Dashboard" className="menu-item-text"/>
-              </Nav.Link>
-              <RoundedImage src={'/account.svg'}/>
+              <Nav className="flex-column gap-3">
+                <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
+                // onMouseEnter={nav1}
+                // onMouseLeave={resetNav}
+                >
+                  <Nav.Link as={Link} to="/dashboard" onClick={() => setShowMenu(false)} className="navigation-item"
+                  >
+                    <DynamicP text="Dashboard" className="menu-item-text" />
+                  </Nav.Link>
+                  <RoundedImage src={'/account.svg'} />
+                </DynamicDiv>
+                <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
+                // onMouseEnter={nav2}
+                // onMouseLeave={resetNav}            
+                >
+                  <Nav.Link as={Link} to="/accounts" onClick={() => setShowMenu(false)} className="navigation-item">
+                    <DynamicP text="Accounts" className="menu-item-text" />
+                  </Nav.Link>
+                  <RoundedImage src={'/account.svg'} />
+                </DynamicDiv>
+                <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
+                // onMouseEnter={nav3}
+                // onMouseLeave={resetNav}            
+                >
+                  <Nav.Link as={Link} to="/about-contact" onClick={() => setShowMenu(false)} className="navigation-item">
+                    <DynamicP text="About & Contact" className="menu-item-text" />
+                  </Nav.Link>
+                  <RoundedImage src={'/account.svg'} />
+                </DynamicDiv>
+                <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
+                // onMouseEnter={nav4}
+                // onMouseLeave={resetNav}            
+                >
+                  <Nav.Link as={Link} to="/reports" onClick={() => setShowMenu(false)} className="navigation-item">
+                    <DynamicP text="Reports" className="menu-item-text" />
+                  </Nav.Link>
+                  <RoundedImage src={'/account.svg'} />
+                </DynamicDiv>
+                <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
+                // onMouseEnter={nav5}
+                // onMouseLeave={resetNav}            
+                >
+                  <Nav.Link as={Link} to="/feedback" onClick={() => setShowMenu(false)} className="navigation-item">
+                    <DynamicP text="Feedback" className="menu-item-text" />
+                  </Nav.Link>
+                  <RoundedImage src={'/account.svg'} />
+                </DynamicDiv>
+              </Nav>
             </DynamicDiv>
-            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
-                        // onMouseEnter={nav2}
-                        // onMouseLeave={resetNav}            
-            >
-              <Nav.Link as={Link} to="/accounts" onClick={() => setShowMenu(false)} className="navigation-item">
-                <DynamicP text="Accounts" className="menu-item-text"/>
-              </Nav.Link>
-              <RoundedImage src={'/account.svg'}/>
-            </DynamicDiv>
-            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
-                        // onMouseEnter={nav3}
-                        // onMouseLeave={resetNav}            
-            >
-              <Nav.Link as={Link} to="/about-contact" onClick={() => setShowMenu(false)} className="navigation-item">
-                <DynamicP text="About & Contact" className="menu-item-text"/>
-              </Nav.Link>
-              <RoundedImage src={'/account.svg'}/>
-            </DynamicDiv>
-            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
-                        // onMouseEnter={nav4}
-                        // onMouseLeave={resetNav}            
-            >
-              <Nav.Link as={Link} to="/reports" onClick={() => setShowMenu(false)} className="navigation-item">
-                <DynamicP text="Reports" className="menu-item-text"/>
-              </Nav.Link>
-              <RoundedImage src={'/account.svg'}/>
-            </DynamicDiv>
-            <DynamicDiv className="align-items-center d-flex flex-row justify-content-between navigation-div"
-                        // onMouseEnter={nav5}
-                        // onMouseLeave={resetNav}            
-            >
-              <Nav.Link as={Link} to="/feedback" onClick={() => setShowMenu(false)} className="navigation-item">
-                <DynamicP text="Feedback" className="menu-item-text"/>
-              </Nav.Link>
-              <RoundedImage src={'/account.svg'}/>
-            </DynamicDiv>
-          </Nav>
-          </DynamicDiv>
-        </Offcanvas.Body>
+          </Offcanvas.Body>
         </DynamicDiv>
       </Offcanvas>
       {
         showMenu && <Offcanvas>
-                      <DynamicDiv>
-                        We're really here man
-                      </DynamicDiv>
-                    </Offcanvas>
+          <DynamicDiv>
+            We're really here man
+          </DynamicDiv>
+        </Offcanvas>
       }
 
       {/* {

@@ -21,16 +21,16 @@ export default function Login() {
 
     try {
       const { token, user } = await loginUser({
-        Email:email,
-        Password:password,
+        Email: email,
+        Password: password,
       });
 
       if (!token || !user) {
         throw new Error("Invalid server response");
       }
-      
 
-      if(user.RegType !== 'Admin'){
+
+      if (user.RegType !== 'Admin') {
         toast.error('Invalid registration type. Only admins can login here.');
         setEmail('');
         setPassword('');
@@ -43,13 +43,13 @@ export default function Login() {
 
       toast.success('Login Successful!!!');
 
-      setTimeout(()=>{
+      setTimeout(() => {
         switch (user.RegType) {
           case "Admin":
             navigate("/dashboard");
             break;
           default:
-            console.error('Invalid registration type'); 
+            console.error('Invalid registration type');
         }
       }, 3000);
 
@@ -65,7 +65,7 @@ export default function Login() {
   return (
     <>
       <div className="align-items-center background d-flex flex-column justify-content-center min-vh-100">
-        <LoginStrip/>
+        <LoginStrip />
         <div
           className="card p-4 shadow"
           style={{ maxWidth: "400px", width: "100%" }}

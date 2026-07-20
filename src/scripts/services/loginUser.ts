@@ -1,14 +1,25 @@
 import apiFetch from "./utils/apiFetch";
-import type User from "../../interfaces/user";
+
+export interface UserPayload {
+  Name?: string;
+  PhoneNo?: string;
+  Email?: string;
+  Password?: string;
+  Gender?: string;
+  RegType?: string;
+  dLocation?: string;
+  Photo?: Blob | null;
+  accStatus?: string;
+}
 
 interface LoginResponse {
   token: string;
-  user?: User;
+  user?: UserPayload;
 }
 
-interface LogginCreds{
-    Email:string;
-    Password:string;
+interface LogginCreds {
+  Email: string;
+  Password: string;
 }
 export default async function loginUser(creds: LogginCreds): Promise<LoginResponse> {
   try {

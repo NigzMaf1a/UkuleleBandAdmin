@@ -8,7 +8,7 @@ import UserDetailCard from "./modals/UserDetailCard";
 import type User from "../interfaces/user";
 
 interface UserCardProps {
-  user:User;
+  user: User;
   buttonText: string;
   buttonVariant: string;
   className4Button?: string;
@@ -24,18 +24,18 @@ export default function UserCard({
 }: UserCardProps) {
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  function toggleModal(){
+  function toggleModal() {
     setShowModal(prev => !prev);
   }
 
   return (
     <>
       <Row className="align-items-center bg-white border mb-2 p-3 rounded user-card"
-           onClick={toggleModal}
+        onClick={toggleModal}
       >
         <Col xs={8}>
-          <h6 className="fw-bold mb-1">{user.Name}</h6>
-          <small className="text-muted">{user.Email}</small>
+          <h6 className="fw-bold mb-1">{user.name}</h6>
+          <small className="text-muted">{user.email}</small>
         </Col>
         <Col xs={4} className="text-end">
           <Button variant={buttonVariant} size="sm" onClick={onAction} className={`${className4Button}`}>
@@ -43,7 +43,7 @@ export default function UserCard({
           </Button>
         </Col>
       </Row>
-      {showModal && <UserDetailCard user={user} callback1={toggleModal}/>}
+      {showModal && <UserDetailCard user={user} callback1={toggleModal} />}
     </>
   );
 }

@@ -89,7 +89,7 @@ function Strip({ title }: StripProps) {
     }
 
     if (user && token) {
-      const admin = new Admin(user.RegId, token);
+      const admin = new Admin(user.regid as number, token);
 
       setThisAdmin(admin);
     }
@@ -105,7 +105,7 @@ function Strip({ title }: StripProps) {
 
       if (thisAdmin && user) {
         // FIX: remove incorrect User[] typing
-        const loggedAdmin = await thisAdmin.loggedInAdmin(user.RegId);
+        const loggedAdmin = await thisAdmin.loggedInAdmin(user.regid as number);
 
         console.log("Logged in admin:", loggedAdmin);
 
