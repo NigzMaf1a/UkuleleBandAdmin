@@ -77,7 +77,7 @@ export default function RegModal({ callback2 }: RegModalProps) {
         regtype: validated.regType as RegType,
         dlocation: validated.location,
         accstatus: validated.location,
-        photo: null
+        photo: photo
 
       };
       await thisAdmin?.registerUser(payload);

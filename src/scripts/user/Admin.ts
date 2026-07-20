@@ -3,7 +3,6 @@ import endpoints from "../services/utils/endpoints";
 import link from "../services/utils/links";
 
 // Interfaces
-import type { UserPayload } from "../../interfaces/user";
 import type User from "../../interfaces/user";
 import type About from "../../interfaces/about";
 import type Inventory from "../../interfaces/inventory";

@@ -14,7 +14,6 @@ import Admin from "../scripts/user/Admin";
 
 //interfaces
 import type User from "../interfaces/user";
-import type { UserPayload } from "../interfaces/user";
 interface EditProfileProps {
   user: User;
   callback1: () => void;
