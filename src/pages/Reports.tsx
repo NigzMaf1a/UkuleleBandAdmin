@@ -153,22 +153,22 @@ const Reports: React.FC = () => {
     const csv =
       filteredData.length > 0
         ? [
-            Object.keys(filteredData[0]).join(
-              ","
-            ),
+          Object.keys(filteredData[0]).join(
+            ","
+          ),
 
-            ...filteredData.map((row) =>
-              Object.values(row)
-                .map(
-                  (value) =>
-                    `"${String(value).replace(
-                      /"/g,
-                      '""'
-                    )}"`
-                )
-                .join(",")
-            ),
-          ].join("\n")
+          ...filteredData.map((row) =>
+            Object.values(row)
+              .map(
+                (value) =>
+                  `"${String(value).replace(
+                    /"/g,
+                    '""'
+                  )}"`
+              )
+              .join(",")
+          ),
+        ].join("\n")
         : "No data";
 
     const blob = new Blob([csv], {

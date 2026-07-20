@@ -20,12 +20,12 @@ interface FeedbackResponseUpdate {
   Response: string;
 }
 
-interface Contact{
-    PhoneNo?:string;
-    EmailAddress?:string;
-    Instagram?:string;
-    Facebook?:string;
-    PoBox?:string;
+interface Contact {
+  PhoneNo?: string;
+  EmailAddress?: string;
+  Instagram?: string;
+  Facebook?: string;
+  PoBox?: string;
 }
 
 
@@ -51,7 +51,7 @@ export default class Admin {
 
   getRegID(): number {
     return this.regID;
-  }  
+  }
 
   private apiFetch = async <T = unknown>(
     endpoint: string,
@@ -105,7 +105,7 @@ export default class Admin {
     }
   }
 
-  async fetchFeedback() :Promise<Feedback[]> {
+  async fetchFeedback(): Promise<Feedback[]> {
     return this.apiFetch(endpoints.fetchFeedback);
   }
 
@@ -125,7 +125,7 @@ export default class Admin {
     return this.apiFetch(endpoints.fetchInpections);
   }
 
-  async fetchInventory():Promise<Inventory[]>{
+  async fetchInventory(): Promise<Inventory[]> {
     return this.apiFetch(endpoints.fetchInventory);
   }
 
@@ -145,8 +145,8 @@ export default class Admin {
     });
   }
 
-  async registerUser(user:UserPayload){
-    try{
+  async registerUser(user: User) {
+    try {
       const result = await this.apiFetch<RegisterResponse>(endpoints.addUser, {
         method: 'POST',
         body: JSON.stringify(user),
@@ -158,27 +158,27 @@ export default class Admin {
 
       console.log('User registered successfully:', result);
       return result;
-    } catch(err){
+    } catch (err) {
       console.error('Error occurred while registering the user:', err);
       throw err;
     }
   }
 
-  async fetchAbout():Promise<About>{
+  async fetchAbout(): Promise<About> {
     return this.apiFetch(endpoints.fetchAbout);
   }
 
-  async editAbout(detail:string){
+  async editAbout(detail: string) {
     return await this.apiFetch(endpoints.updateAbout, {
-      method:'PUT',
-      body:JSON.stringify({Detail:detail})
+      method: 'PUT',
+      body: JSON.stringify({ Detail: detail })
     });
   }
 
-  async editContacts(contact:Contact){
+  async editContacts(contact: Contact) {
     return await this.apiFetch(endpoints.updateContacts, {
-      method:'POST',
-      body:JSON.stringify(contact)
+      method: 'POST',
+      body: JSON.stringify(contact)
     });
   }
 
@@ -188,10 +188,10 @@ export default class Admin {
     });
   }
 
-  async updateAdmin(admin:UserPayload){
+  async updateAdmin(admin: UserPayload) {
     return await this.apiFetch(endpoints.updateUser, {
-      method:'PATCH',
-      body:JSON.stringify(admin)
+      method: 'PATCH',
+      body: JSON.stringify(admin)
     })
   }
 }

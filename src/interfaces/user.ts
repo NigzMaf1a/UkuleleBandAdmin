@@ -16,6 +16,7 @@ export default interface Users {
 }
 
 export interface UserPayload {
+    RegID: number;
     Name?: string;
     PhoneNo?: string;
     Email?: string;

@@ -22,10 +22,10 @@ import Admin from "../scripts/user/Admin";
 import link from "../scripts/services/utils/links";
 
 // interfaces
-import type User from "../interfaces/user";
+import type { UserPayload } from "../interfaces/user";
 
 interface About {
-  Detail: string;
+  detail: string;
 }
 
 interface Contact {
@@ -73,7 +73,7 @@ export default function AboutAndContact() {
     const token = localStorage.getItem("token");
     const userString = localStorage.getItem("user");
 
-    const user: User | null = userString
+    const user: UserPayload | null = userString
       ? JSON.parse(userString)
       : null;
 
@@ -86,7 +86,7 @@ export default function AboutAndContact() {
     }
 
     if (user && token) {
-      const admin = new Admin(user.RegId, token);
+      const admin = new Admin(user.RegID as number, token);
       setThisAdmin(admin);
     }
   }, [navigate]);
@@ -100,7 +100,7 @@ export default function AboutAndContact() {
 
           console.log(about);
 
-          setAboutText(about.Detail);
+          setAboutText(about.detail);
         }
       } catch (err: unknown) {
         if (err instanceof Error) {

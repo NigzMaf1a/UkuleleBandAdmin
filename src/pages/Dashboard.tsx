@@ -12,6 +12,7 @@ import Strip from "../components/headers/Strip";
 import Main from "../components/headers/Main";
 
 import type User from '../interfaces/user';
+import type { UserPayload } from "../interfaces/user";
 
 export default function Dashboard() {
   const [pending, setPending] = useState<User[]>([]);
@@ -20,29 +21,29 @@ export default function Dashboard() {
   const [thisAdmin, setThisAdmin] = useState<Admin>();
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = localStorage.getItem('token');
     const userString = localStorage.getItem('user');
-    const user: User | null = userString ? JSON.parse(userString) : null;
+    const user: UserPayload | null = userString ? JSON.parse(userString) : null;
 
     if (!token) {
       navigate('/login');
       return;
-    }    
-    if(user && token)(()=>{
-      const admin = new Admin(user.RegId, token);
+    }
+    if (user && token) (() => {
+      const admin = new Admin(user.RegID, token);
       setThisAdmin(admin);
     })();
   }, [navigate]);
 
   // Fetch data from API
   useEffect(() => {
-    if(thisAdmin)(async () => {
+    if (thisAdmin) (async () => {
       try {
 
-        const allPend:User[] = await thisAdmin.fetchPendingUsers(); 
-        const allApproved:User[] = await thisAdmin.fetchApprovedUsers();
-        const allInactive:User[] = await thisAdmin.fetchInactiveUsers();
+        const allPend: User[] = await thisAdmin.fetchPendingUsers();
+        const allApproved: User[] = await thisAdmin.fetchApprovedUsers();
+        const allInactive: User[] = await thisAdmin.fetchInactiveUsers();
 
         setPending(allPend);
         setApproved(allApproved);
@@ -64,7 +65,7 @@ export default function Dashboard() {
           buttonText="Approve"
           buttonVariant="success"
           className4Button="approve-user-btn"
-          onAction={() => thisAdmin? thisAdmin.approveUser(user.RegId) : console.error('No Logged in Admin')}
+          onAction={() => thisAdmin ? thisAdmin.approveUser(user.regid as number) : console.error('No Logged in Admin')}
         />
       )),
     [pending, thisAdmin]
@@ -79,7 +80,7 @@ export default function Dashboard() {
           buttonText="Deactivate"
           buttonVariant="danger"
           className4Button="deactivate-user-btn"
-          onAction={() => thisAdmin? thisAdmin.deactivateUser(user.RegId) : console.error('No Logged in Admin')}
+          onAction={() => thisAdmin ? thisAdmin.deactivateUser(user.regid as number) : console.error('No Logged in Admin')}
         />
       )),
     [approved, thisAdmin]
@@ -94,7 +95,7 @@ export default function Dashboard() {
           buttonText="Reactivate"
           buttonVariant="warning"
           className4Button="reactivate-user-btn"
-          onAction={() => thisAdmin ? thisAdmin.reactivateUser(user.RegId) : console.error('No Logged in Admin')}
+          onAction={() => thisAdmin ? thisAdmin.reactivateUser(user.regid as number) : console.error('No Logged in Admin')}
         />
       )),
     [inactive, thisAdmin]
@@ -102,8 +103,8 @@ export default function Dashboard() {
 
   return (
     <Skeleton>
-      <Strip title="Ukulele Band Admin Module"/>
-      <Main brand="Dashboard"/>
+      <Strip title="Ukulele Band Admin Module" />
+      <Main brand="Dashboard" />
       <Container className="py-4">
         {pending.length > 0 && (
           <Card className="mb-4">

@@ -7,8 +7,8 @@ import DynamicButton from "../buttons/DynamicButton";
 import LabelledInput from "../inputs/LabelledInput";
 
 //interfaces
-import type { UserPayload } from '../../interfaces/user';
 import type User from "../../interfaces/user";
+import type { RegType } from "../../interfaces/user";
 
 //scripts
 import Admin from "../../scripts/user/Admin";
@@ -68,16 +68,16 @@ export default function RegModal({ callback2 }: RegModalProps) {
 
       const hashedPassword = await hashPassword(validated.password)
 
-      const payload: UserPayload = {
-        Name: validated.name,
-        PhoneNo: validated.phone,
-        Email: validated.email,
-        Password: hashedPassword,
-        Gender: validated.gender,
-        RegType: validated.regType,
-        dLocation: validated.location,
-        accStatus: validated.location,
-        Photo: photo
+      const payload: User = {
+        name: validated.name,
+        phoneno: validated.phone,
+        email: validated.email,
+        password: hashedPassword,
+        gender: validated.gender,
+        regtype: validated.regType as RegType,
+        dlocation: validated.location,
+        accstatus: validated.location,
+        photo: null
 
       };
       await thisAdmin?.registerUser(payload);

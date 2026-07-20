@@ -25,7 +25,7 @@
 //     <Skeleton>
 //       <Tabs defaultActiveKey="about" id="about-contact-tabs" className="mb-3" fill>
 //           <Tab eventKey="about" title="About"></Tab>
-//       </Tabs>      
+//       </Tabs>
 //     </Skeleton>
 //   )
 // }

@@ -1,6 +1,6 @@
 import apiFetch from "./utils/apiFetch";
 
-import type { UserPayload, regType } from "../../interfaces/user";
+import type { UserPayload, RegType } from "../../interfaces/user";
 
 export interface RegisterResponse {
   RegID?: number;
@@ -8,7 +8,7 @@ export interface RegisterResponse {
   error?: string;
 }
 
-const apiMap: Record<regType, string> = {
+const apiMap: Record<RegType, string> = {
   Customer: "/api/customer/public/add",
   Accountant: "/api/accountant/add",
   Admin: "/api/admin/public/add",
@@ -18,8 +18,8 @@ const apiMap: Record<regType, string> = {
 export default async function registerUser(
   user: UserPayload
 ): Promise<RegisterResponse> {
-  
-  const regType = user.RegType as regType;
+
+  const regType = user.RegType as RegType;
 
   const regAPI = apiMap[regType];
 
