@@ -24,11 +24,11 @@ import link from "../scripts/services/utils/links";
 // interfaces
 import type User from "../interfaces/user";
 
-interface About {
+export interface About {
   Detail: string;
 }
 
-interface Contact {
+export interface Contact {
   phoneno: string;
   emailaddress: string;
   instagram: string;

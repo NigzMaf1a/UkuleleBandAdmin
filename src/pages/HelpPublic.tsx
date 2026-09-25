@@ -2,10 +2,11 @@
 import Skeleton from "../components/Skeleton copy"
 import GeneralPageFooter from "../components/GeneralPageFooter"
 
-export default function AboutUsPublic() {
+export default function HelpPublic() {
+
     return (
         <Skeleton>
-            About Us
+            Help
 
             <GeneralPageFooter />
         </Skeleton>
