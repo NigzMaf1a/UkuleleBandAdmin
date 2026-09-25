@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Accounts from "./pages/Accounts";
 import AboutAndContact from "./pages/AboutAndContact";
+import AboutUsPublic from "./pages/AboutUsPublic";
 import Reports from "./pages/Reports";
 import Feedback from "./pages/Feedback";
 // import User from "./pages/User";
@@ -19,6 +20,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/accounts" element={<Accounts />} />
         <Route path="/about-contact" element={<AboutAndContact />} />
+        <Route path="/aboutus" element={<AboutUsPublic />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/feedback" element={<Feedback />} />
         {/* <Route path="/user" element={<User />} /> */}
