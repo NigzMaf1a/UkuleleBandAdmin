@@ -25,9 +25,9 @@ export default function useHelp(): Props {
     }
 
     return {
-        segment: segment,
-        toggleFaq: toggleFaq,
-        toggleNavigation: toggleNavigation,
-        toggleChatbot: toggleChatbot
+        segment,
+        toggleFaq,
+        toggleNavigation,
+        toggleChatbot
     }
 }
