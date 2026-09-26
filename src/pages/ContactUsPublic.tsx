@@ -1,16 +1,21 @@
-//components
 import Skeleton from "../components/Skeleton copy"
+
 import GeneralPageFooter from "../components/GeneralPageFooter"
+
 import GeneralStrip from "../sections/GeneralStrip"
 
+import GeneralPageProvider from "../contexts/GeneralPageProvider"
+
 export default function ContactUsPublic() {
-
     return (
-        <Skeleton>
-            <GeneralStrip />
-            Contact Us
+        <GeneralPageProvider>
+            <Skeleton>
+                <GeneralStrip />
 
-            <GeneralPageFooter />
-        </Skeleton>
+                Contact Us
+
+                <GeneralPageFooter />
+            </Skeleton>
+        </GeneralPageProvider>
     )
 }
