@@ -1,5 +1,7 @@
-.informer{
-    position:fixed;
+@import "tailwindcss";
+
+.informer {
+    position: fixed;
     top: 70px;
     left: 0;
     z-index: 1000;
@@ -9,7 +11,7 @@
     margin-bottom: 10px;
 }
 
-.informer-item{
+.informer-item {
     position: relative;
     width: 100%;
     height: 100px;
@@ -24,46 +26,46 @@
     z-index: 1000;
 }
 
-.informer-text{
+.informer-text {
     color: #1589FF;
 }
 
-.informer-kids{
+.informer-kids {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-.switch-user-btn-cont{
+.switch-user-btn-cont {
     width: 200px;
 }
 
-.switch-user-btn{
+.switch-user-btn {
     width: 55px;
     height: 35px;
     border: 1px solid;
 }
 
-.switch-user-btn-login{
+.switch-user-btn-login {
     border-color: green;
     color: green;
 }
 
-.switch-user-btn-login:hover{
+.switch-user-btn-login:hover {
     background-color: green;
     color: white;
 }
 
-.switch-user-btn-close{
+.switch-user-btn-close {
     border-color: red;
     color: red;
 }
 
-.switch-user-btn-close:hover{
+.switch-user-btn-close:hover {
     background-color: red;
     color: white;
 }
 
-.golden-rod{
+.golden-rod {
     background-color: #AF7817;
 }

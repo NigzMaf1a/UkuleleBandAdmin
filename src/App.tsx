@@ -15,22 +15,24 @@ import Feedback from "./pages/Feedback";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/aboutus" replace />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/accounts" element={<Accounts />} />
-        <Route path="/about-contact" element={<AboutAndContact />} />
-        <Route path="/aboutus" element={<AboutUsPublic />} />
-        <Route path="/contactus" element={<ContactUsPublic />} />
-        <Route path="/help" element={<HelpPublic />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/feedback" element={<Feedback />} />
-        {/* <Route path="/user" element={<User />} /> */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/aboutus" replace />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/accounts" element={<Accounts />} />
+          <Route path="/about-contact" element={<AboutAndContact />} />
+          <Route path="/aboutus" element={<AboutUsPublic />} />
+          <Route path="/contactus" element={<ContactUsPublic />} />
+          <Route path="/help" element={<HelpPublic />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/feedback" element={<Feedback />} />
+          {/* <Route path="/user" element={<User />} /> */}
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
