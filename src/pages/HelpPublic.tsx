@@ -14,6 +14,7 @@ class Styles {
 }
 
 export default function HelpPublic() {
+
     return (
         <GeneralPageProvider>
             <Skeleton>

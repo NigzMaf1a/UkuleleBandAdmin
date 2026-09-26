@@ -18,7 +18,6 @@ export default function AppRoutes() {
             <Route path="/reports" element={<Reports />} />
             <Route path="/feedback" element={<Feedback />} />
 
-            <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
     )
 }
