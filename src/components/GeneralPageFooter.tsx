@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom"
 
-//components
 import ContactText from "../sections/ContactText"
+
+import { useGeneralPage } from "../contexts/GeneralPageContext"
 
 export default function GeneralPageFooter() {
     const navigate = useNavigate()
+
+    const { about, help } = useGeneralPage()
 
     class Navigation {
         static aboutUs() {
@@ -43,21 +46,57 @@ export default function GeneralPageFooter() {
     }
 
     return (
-        <div className={`${Styles.body()}`}>
-            <div className={`${Styles.sector()}`}>
-                <p className={`${Styles.text()}`} onClick={() => Navigation.aboutUs()}>About Us</p>
+        <div className={Styles.body()}>
+            <div className={Styles.sector()}>
+                <p
+                    className={Styles.text()}
+                    onClick={Navigation.aboutUs}
+                >
+                    About Us
+                </p>
 
-                <div className={`${Styles.tray()}`}>
-                    <p className={`${Styles.sectorText()}`}>who we are</p>
-                    <p className={`${Styles.sectorText()}`}>our services</p>
-                    <p className={`${Styles.sectorText()}`}>get started</p>
+                <div className={Styles.tray()}>
+                    <p
+                        className={Styles.sectorText()}
+                        onClick={() => {
+                            Navigation.aboutUs()
+                            about.functions.whoWeAre()
+                        }}
+                    >
+                        who we are
+                    </p>
+
+                    <p
+                        className={Styles.sectorText()}
+                        onClick={() => {
+                            Navigation.aboutUs()
+                            about.functions.ourServices()
+                        }}
+                    >
+                        our services
+                    </p>
+
+                    <p
+                        className={Styles.sectorText()}
+                        onClick={() => {
+                            Navigation.aboutUs()
+                            about.functions.getStarted()
+                        }}
+                    >
+                        get started
+                    </p>
                 </div>
             </div>
 
-            <div className={`${Styles.sector()}`}>
-                <p className={`${Styles.text()}`} onClick={() => Navigation.contactUs()}>Contact Us</p>
+            <div className={Styles.sector()}>
+                <p
+                    className={Styles.text()}
+                    onClick={Navigation.contactUs}
+                >
+                    Contact Us
+                </p>
 
-                <div className={`${Styles.tray()}`}>
+                <div className={Styles.tray()}>
                     <ContactText label="Email :" text="@@@" link="" />
                     <ContactText label="Instagram :" text="@@@" link="" />
                     <ContactText label="Facebook :" text="@@@" link="" />
@@ -66,13 +105,44 @@ export default function GeneralPageFooter() {
                 </div>
             </div>
 
-            <div className={`${Styles.sector()}`}>
-                <p className={`${Styles.text()}`} onClick={() => Navigation.help()}>Help </p>
+            <div className={Styles.sector()}>
+                <p
+                    className={Styles.text()}
+                    onClick={Navigation.help}
+                >
+                    Help
+                </p>
 
-                <div className={`${Styles.tray()}`}>
-                    <p className={`${Styles.sectorText()}`}>FAQs</p>
-                    <p className={`${Styles.sectorText()}`}>Navigation</p>
-                    <p className={`${Styles.sectorText()}`}>Chatbot</p>
+                <div className={Styles.tray()}>
+                    <p
+                        className={Styles.sectorText()}
+                        onClick={() => {
+                            Navigation.help()
+                            help.functions.faqs()
+                        }}
+                    >
+                        FAQs
+                    </p>
+
+                    <p
+                        className={Styles.sectorText()}
+                        onClick={() => {
+                            Navigation.help()
+                            help.functions.navigation()
+                        }}
+                    >
+                        Navigation
+                    </p>
+
+                    <p
+                        className={Styles.sectorText()}
+                        onClick={() => {
+                            Navigation.help()
+                            help.functions.chatbot()
+                        }}
+                    >
+                        Chatbot
+                    </p>
                 </div>
             </div>
         </div>

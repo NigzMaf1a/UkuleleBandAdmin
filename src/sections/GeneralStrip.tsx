@@ -1,5 +1,6 @@
-import type { AboutFunctions, HelpFunctions } from "../scripts/general"
-import GeneralFunctions from "../functions/general"
+import { useLocation } from "react-router-dom"
+
+import { useGeneralPage } from "../contexts/GeneralPageContext"
 
 interface BtnProps {
     label: string
@@ -11,64 +12,79 @@ const styles = 'flex flex-row w-full h-full justify-evenly items-center'
 function Button({ label, onClick }: BtnProps) {
     const styles = 'w-30 h-10 flex rounded-xl items-center justify-center bg-white text-blue-500 hover:cursor-pointer'
 
-    return <div className={styles} onClick={() => onClick()}>{label}</div>
+    return (
+        <div
+            className={styles}
+            onClick={onClick}
+        >
+            {label}
+        </div>
+    )
 }
 
-function HelpStrip({ faqs, navigation, chatbot }: HelpFunctions) {
+function HelpStrip() {
+    const { help } = useGeneralPage()
 
     return (
         <div className={styles}>
-            <Button label="FAQs" onClick={() => faqs()} />
-            <Button label="Navigation" onClick={() => navigation()} />
-            <Button label="Chatbot" onClick={() => chatbot()} />
+            <Button
+                label="FAQs"
+                onClick={help.functions.faqs}
+            />
+
+            <Button
+                label="Navigation"
+                onClick={help.functions.navigation}
+            />
+
+            <Button
+                label="Chatbot"
+                onClick={help.functions.chatbot}
+            />
         </div>
     )
 }
 
 function ContactStrip() {
-
     return (
         <div className={styles}>
-
         </div>
     )
 }
 
-function AboutStrip({ whoWeAre, ourServices, getStarted }: AboutFunctions) {
+function AboutStrip() {
+    const { about } = useGeneralPage()
 
     return (
         <div className={styles}>
-            <Button label="Who we are" onClick={() => whoWeAre()} />
-            <Button label="Our services" onClick={() => ourServices()} />
-            <Button label="Get started" onClick={() => getStarted()} />
+            <Button
+                label="Who we are"
+                onClick={about.functions.whoWeAre}
+            />
+
+            <Button
+                label="Our services"
+                onClick={about.functions.ourServices}
+            />
+
+            <Button
+                label="Get started"
+                onClick={about.functions.getStarted}
+            />
         </div>
     )
 }
 
 export default function GeneralStrip() {
-    type Path = '/aboutus' | '/contactus' | '/help'
-
-    const path: Path = location.pathname as Path
-
-    console.log('Path', path)
+    const { pathname } = useLocation()
 
     return (
         <div className="w-full h-[80px] flex flex-row bg-blue-500 py-2 justify-center items-center">
-            {
-                path === '/aboutus' ? <AboutStrip
-                    whoWeAre={GeneralFunctions.aboutFunctions().whoWeAre}
-                    ourServices={GeneralFunctions.aboutFunctions().ourServices}
-                    getStarted={GeneralFunctions.aboutFunctions().getStarted}
-                /> :
+            {pathname === '/aboutus' && <AboutStrip />}
 
-                    path === '/contactus' ? <ContactStrip /> :
+            {pathname === '/contactus' && <ContactStrip />}
 
-                        <HelpStrip
-                            faqs={GeneralFunctions.helpFunctions().faqs}
-                            navigation={GeneralFunctions.helpFunctions().navigation}
-                            chatbot={GeneralFunctions.helpFunctions().chatbot}
-                        />
-            }
+            {pathname === '/help' && <HelpStrip />}
         </div>
     )
 }
