@@ -1,6 +1,9 @@
 import type { AboutFunctions, HelpFunctions } from "../scripts/general"
 
+import useHelp from "../hooks/help"
+
 export default class GeneralFunctions {
+
     static aboutFunctions(): AboutFunctions {
         return {
             whoWeAre: () => {
@@ -15,7 +18,9 @@ export default class GeneralFunctions {
 
     static helpFunctions(): HelpFunctions {
         return {
-            faqs: () => { },
+            faqs: (fun: () => void) => {
+                fun()
+            },
 
             navigation: () => { },
 
