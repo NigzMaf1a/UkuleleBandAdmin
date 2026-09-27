@@ -41,7 +41,7 @@ export default function HelpPublic() {
             <Skeleton>
                 <GeneralStrip />
 
-                <div className={GeneralStyles.cont}>
+                <div className={`${GeneralStyles.cont} justify-center items-center`}>
                     <HelpContent />
                 </div>
 
