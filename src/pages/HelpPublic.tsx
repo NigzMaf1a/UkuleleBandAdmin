@@ -1,20 +1,16 @@
 import Skeleton from "../components/Skeleton copy"
-
 import GeneralPageFooter from "../components/GeneralPageFooter"
-
 import FAQs from "../sections/FAQs"
-
 import GeneralStrip from "../sections/GeneralStrip"
-
 import Navigation from "../sections/Navigation"
-
 import ChatAdmin from "../sections/ChatAdmin"
 
 import GeneralPageProvider from "../contexts/GeneralPageProvider"
-
 import { useGeneralPage } from "../contexts/GeneralPageContext"
 
 import type Faqs from "../interfaces/faqs"
+
+import GeneralStyles from "../tailwind/general"
 
 const faqs: Faqs[] = [
     {
@@ -23,13 +19,6 @@ const faqs: Faqs[] = [
         Answer: 'Download the app'
     }
 ]
-
-class Styles {
-    static body(): string {
-        const dim = 'w-full h-125 flex flex-row'
-        return `${dim}`
-    }
-}
 
 function HelpContent() {
     const { help } = useGeneralPage()
@@ -52,7 +41,7 @@ export default function HelpPublic() {
             <Skeleton>
                 <GeneralStrip />
 
-                <div className={Styles.body()}>
+                <div className={GeneralStyles.cont}>
                     <HelpContent />
                 </div>
 

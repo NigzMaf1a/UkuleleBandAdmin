@@ -1,5 +1,7 @@
 export default function Navigation(){
     return (
-        <div></div>
+        <div>
+            Navigation
+        </div>
     )
 }
