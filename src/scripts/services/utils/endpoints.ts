@@ -23,6 +23,7 @@ const endpoints = {
     updateContacts:'/api/contacts/add',
     updateUser:'/api/',
     addUser:'/api/customer/add',
-    loggedUser:'/api/admin/logged'
+    loggedUser:'/api/admin/logged',
+    addQuery:'/api/gen/query/add'
 };
 export default endpoints;
