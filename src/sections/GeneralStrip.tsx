@@ -38,7 +38,7 @@ function HelpStrip() {
             />
 
             <Button
-                label="Chatbot"
+                label="Chat Admin"
                 onClick={help.functions.chatbot}
             />
         </div>

@@ -141,7 +141,7 @@ export default function GeneralPageFooter() {
                             help.functions.chatbot()
                         }}
                     >
-                        Chatbot
+                        Chat Admin
                     </p>
                 </div>
             </div>
