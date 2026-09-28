@@ -1,27 +1,48 @@
 import endpoints from "../scripts/services/utils/endpoints"
 
-export default class ProcessChat{
-    static validateQuery(){}
+export default class ProcessChat {
+    static validateQuery(query: string): boolean {
+        return query.trim().length > 0
+    }
 
-    static validateEmail(){}
+    static validateEmail(email: string): boolean {
+        const value = email.trim()
 
-    static async sendChat(query:string):Promise<boolean>{
+        if (!value) {
+            return false
+        }
+
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+    }
+
+    static async sendChat(query: string): Promise<boolean> {
         try {
-            const link = ''
-            const address = `${link}`
+            if (!this.validateQuery(query)) {
+                return false
+            }
 
-            const res = await fetch(address, {
-                method:'POST',
-                body:JSON.stringify(query)
+            const link = ''
+
+            const address = `${link}${endpoints.addQuery}`
+
+            const response = await fetch(address, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    query: query.trim()
+                })
             })
 
-            if(!res.ok){
+            if (!response.ok) {
                 throw new Error('Failed to add your query')
             }
 
             return true
-        } catch (error) {
-            console.log('Chat Error:', error)
+        } catch (error: unknown) {
+            console.error('Chat Error:', error)
+
             return false
         }
     }
