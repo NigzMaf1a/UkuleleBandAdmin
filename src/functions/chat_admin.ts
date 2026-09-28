@@ -2,7 +2,7 @@ import endpoints from "../scripts/services/utils/endpoints"
 
 export default class ProcessChat {
     static validateQuery(query: string): boolean {
-        return query.trim().length > 0
+        return query.trim().length > 15
     }
 
     static validateEmail(email: string): boolean {
