@@ -1,6 +1,6 @@
 import GeneralStyles from "../tailwind/general"
 
-export default function ChatAdmin(){
+export default function ChatAdmin() {
     return (
         <div className={GeneralStyles.chatAdmin().body}>
             <p className={GeneralStyles.chatAdmin().title}>
@@ -13,7 +13,7 @@ export default function ChatAdmin(){
                 </p>
 
                 <input
-                   className={GeneralStyles.chatAdmin().input} 
+                    className={GeneralStyles.chatAdmin().input}
                 />
 
             </div>

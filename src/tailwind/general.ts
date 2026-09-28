@@ -9,6 +9,7 @@ interface ChatStyles{
     cont: string
     label: string
     input: string
+    email:string
     btn: string
 }
 
@@ -27,7 +28,7 @@ export default class GeneralStyles{
         return {
             body:`${body_dim} px-2 gap-2`,
             title:`text-center text-lg text-blue-500 pt-2`,
-            cont:`w-full h-[200px] px-2`,
+            cont:`w-full h-[150px] px-2`,
             label:`text-blue-500 text-lg`,
             input:`w-full h-[100px] border-1 border-neutral-300 hover:border-blue-500 rounded-xl px-1 py-1 flex`,
             btn:`w-full h-[40px] bg-blue-500 text-white rounded-xl flex justify-center items-center hover:cursor-pointer mt-auto mb-4`
