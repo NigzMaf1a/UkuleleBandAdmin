@@ -21,6 +21,12 @@ interface WhoWeAreStyles {
     text: (more?: string) => string
 }
 
+interface OurServicesStyles {
+    body: (more?: string) => string
+    head: (more?: string) => string
+    item: (more?: string) => string
+}
+
 interface ContactStyles {
     cont: (more?: string) => string
     item: (more?: string) => string
@@ -78,7 +84,15 @@ export default class GeneralStyles {
         }
     }
 
-    static ourServices() { }
+    static ourServices(): OurServicesStyles {
+        const text = 'tracking-tight leading-tight'
+
+        return {
+            body: (more?: string) => `mx-2 my-2 rounded-xl w-[98%] h-full  px-3 py-3 ${more}`,
+            head: (more?: string) => `text-lg text-blue-500 ${text} ${more}`,
+            item: (more?: string) => `text-sm ${text} ${more}`
+        }
+    }
 
     static getStarted(): GetStartedStyles {
 
