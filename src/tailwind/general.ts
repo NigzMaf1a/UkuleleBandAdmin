@@ -1,6 +1,9 @@
 interface FAQStyles {
     body: string
     cont: string
+    cont_clicked: string
+    label: (more?: string) => string
+    text: (more?: string) => string
 }
 
 interface ChatStyles {
@@ -13,13 +16,44 @@ interface ChatStyles {
     btn: string
 }
 
+interface WhoWeAreStyles {
+    body: (more?: string) => string
+    text: (more?: string) => string
+}
+
+interface ContactStyles {
+    cont: (more?: string) => string
+    item: (more?: string) => string
+    right: (more?: string) => string
+    left: (more?: string) => string
+    img: (more?: string) => string
+    label: (more?: string) => string
+    text: (more?: string) => string
+}
+
+interface GetStartedStyles {
+    body: (more?: string) => string
+    strip: (more?: string) => string
+    cont: (more?: string) => string
+    btn: (more?: string) => string
+}
+
 export default class GeneralStyles {
     static cont = 'w-full h-125 flex flex-col'
 
-    static faqs() { }
+    static faqs(): FAQStyles {
+        const grid = 'grid grid-cols-2 gap-2 w-full px-2'
 
-    static navigation(): string {
-        return ``
+        const cont_dim = 'border rounded-xl hover:border-blue-500'
+        const cont_flex = 'flex flex-col px-2 py-2'
+
+        return {
+            body: `${grid}`,
+            cont: `${cont_dim} ${cont_flex} h-[70px] gap-1 border-blue-200`,
+            cont_clicked: `${cont_dim} ${cont_flex} h-[140px] gap-3 border-blue-400`,
+            label: (more?: string) => `text-blue-700 text-[17px] ${more}`,
+            text: (more?: string) => `ml-2 text-sm ${more}`
+        }
     }
 
     static chatAdmin(): ChatStyles {
@@ -36,9 +70,36 @@ export default class GeneralStyles {
         }
     }
 
-    static whoWeAre() { }
+    static whoWeAre(): WhoWeAreStyles {
+
+        return {
+            body: (more?: string) => `mx-2 my-2 rounded-xl w-[98%] h-full  px-3 py-3 ${more}`,
+            text: (more?: string) => `text-lg tracking-tight leading-tight ${more}`
+        }
+    }
 
     static ourServices() { }
 
-    static getStarted() { }
+    static getStarted(): GetStartedStyles {
+
+        return {
+            body: (more?: string) => `w-full h-full ${more}`,
+            strip: (more?: string) => `w-full h-[100px] ${more}`,
+            cont: (more?: string) => `${more}`,
+            btn: (more?: string) => `${more}`
+        }
+    }
+
+    static contacts(): ContactStyles {
+
+        return {
+            cont: (more?: string) => `grid grid-cols-2 gap-2 w-full ${more}`,
+            item: (more?: string) => `flex flex-row items-center h-[100px] rounded-xl ${more}`,
+            left: (more?: string) => `w-[20%] h-full justify-center items-center rounded-full ${more}`,
+            right: (more?: string) => `w-[80%] h-full flex flex-col gap-1 ${more}`,
+            img: (more?: string) => `w-full h-full object-cover ${more}`,
+            label: (more?: string) => `text-blue-500 text-[17px] ${more}`,
+            text: (more?: string) => `text-sm pl-2 ${more}`
+        }
+    }
 }

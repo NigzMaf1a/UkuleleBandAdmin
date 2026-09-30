@@ -1,7 +1,11 @@
-export default function WhoWeAre(){
+import GeneralStyles from "../tailwind/general"
+
+export default function WhoWeAre() {
     return (
-        <div>
-            Who we are
+        <div className={GeneralStyles.whoWeAre().body()}>
+            <p className={GeneralStyles.whoWeAre().text()}>
+                Who we are
+            </p>
         </div>
     )
 }

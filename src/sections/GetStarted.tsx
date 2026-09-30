@@ -1,6 +1,8 @@
-export default function GetStarted(){
+import GeneralStyles from "../tailwind/general"
+
+export default function GetStarted() {
     return (
-        <div>
+        <div className={GeneralStyles.getStarted().body()}>
             Get started
         </div>
     )

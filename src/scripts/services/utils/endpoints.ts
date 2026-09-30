@@ -24,6 +24,7 @@ const endpoints = {
     updateUser: '/api/',
     addUser: '/api/customer/add',
     loggedUser: '/api/admin/logged',
-    addQuery: '/api/gen/query/add'
+    addQuery: '/api/gen/query/add',
+    getQueries: '/api/gen/query/get'
 };
 export default endpoints;

@@ -1,50 +1,46 @@
 import { useState } from "react"
 import type Faqs from "../interfaces/faqs"
+import GeneralStyles from "../tailwind/general"
 
 interface Props {
     faqs: Faqs[]
 }
 
 export default function FAQs({ faqs }: Props) {
-    const [answer, setAnswer] = useState<string>(faqs[0].Answer)
-
-    //style composition
-    const borders = 'border-1 border-neutral-300 rounded-xl'
-
-    const body = 'flex flex-row w-full h-full mx-1 gap-1'
-    const left = `${borders} w-[60%]`
-    const right = `flex flex-col gap-1 w-[40%] ${borders}`
-    const text = ''
-    const label = 'text-center text-blue-500 text-sm'
-    const response = ''
-    const quest_body = ''
-
-    function getAnswer(id: number) {
-        const ans = faqs.find(f => f.FAQID === id)?.Answer as string
-        setAnswer(ans)
-    }
+    const [clickedFaqId, setClickedFaqId] = useState<number>(1)
 
     return (
-        <div className={body}>
-            <div className={left}>
-                <p className={label}>Question</p>
-                {
-                    faqs.map(
-                        f =>
-                            <div className={quest_body} onClick={() => getAnswer(f.FAQID)}>
-                                <p className={text}>{f.Question}</p>
+        <div className={GeneralStyles.faqs().body}>
+            {
+                faqs.map(
+                    (f) =>
+                        <div
+                            key={f.FAQID}
+                            className={clickedFaqId === f.FAQID ? `${GeneralStyles.faqs().cont_clicked} ` : `${GeneralStyles.faqs().cont} flex-row! items-center`}
+                            onClick={() => { setClickedFaqId(f.FAQID) }}
+                        >
+                            {
+                                clickedFaqId !== f.FAQID &&
+                                <div className="rounded-full text-blue-500 text-[50px] h-10 w-10 flex items-center justify-center">
+                                    +
+                                </div>
+                            }
+
+                            <div>
+                                <div className={GeneralStyles.faqs().label()}>Question</div>
+                                <div className={GeneralStyles.faqs().text()}>{f.Question}</div>
                             </div>
-                    )
-                }
-            </div>
 
-            <div className={right}>
-                <p className={label}>Answer</p>
-
-                <div className={response}>
-                    {answer}
-                </div>
-            </div>
+                            {
+                                clickedFaqId === f.FAQID &&
+                                <div>
+                                    <div className={GeneralStyles.faqs().label()}>Answer</div>
+                                    <div className={GeneralStyles.faqs().text()}>{f.Answer}</div>
+                                </div>
+                            }
+                        </div>
+                )
+            }
         </div>
     )
 }
