@@ -63,7 +63,7 @@ export default function GeneralPageFooter() {
                             about.functions.whoWeAre()
                         }}
                     >
-                        who we are
+                        Who we are
                     </p>
 
                     <p
@@ -73,7 +73,7 @@ export default function GeneralPageFooter() {
                             about.functions.ourServices()
                         }}
                     >
-                        our services
+                        Our services
                     </p>
 
                     <p
@@ -83,7 +83,7 @@ export default function GeneralPageFooter() {
                             about.functions.getStarted()
                         }}
                     >
-                        get started
+                        Get started
                     </p>
                 </div>
             </div>

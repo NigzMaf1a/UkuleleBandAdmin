@@ -83,10 +83,10 @@ export default class GeneralStyles {
     static getStarted(): GetStartedStyles {
 
         return {
-            body: (more?: string) => `w-full h-full ${more}`,
-            strip: (more?: string) => `w-full h-[100px] ${more}`,
-            cont: (more?: string) => `${more}`,
-            btn: (more?: string) => `${more}`
+            body: (more?: string) => `w-full h-full flex flex-col gap-1 ${more}`,
+            strip: (more?: string) => `w-full h-[10%] flex flex-col justify-center items-center ${more}`,
+            cont: (more?: string) => `w-full h-[90%] flex justify-center items-center ${more}`,
+            btn: (more?: string) => `w-[130px] h-[40px] flex justify-center items-center bg-blue-500 rounded-xl hover:cursor-pointer ${more}`
         }
     }
 
