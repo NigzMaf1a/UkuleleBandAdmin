@@ -15,13 +15,13 @@ export default class ProcessChat {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
     }
 
-    static async sendChat(query: string): Promise<boolean> {
+    static async sendChat(query: string, email: string): Promise<boolean> {
         try {
-            if (!this.validateQuery(query)) {
+            if (!this.validateQuery(query) || !this.validateEmail(email)) {
                 return false
             }
 
-            const link = ''
+            const link = 'https://ukulelebackend.onrender.com'
 
             const address = `${link}${endpoints.addQuery}`
 

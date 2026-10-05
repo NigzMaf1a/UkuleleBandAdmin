@@ -24,6 +24,7 @@ interface WhoWeAreStyles {
 interface OurServicesStyles {
     body: (more?: string) => string
     head: (more?: string) => string
+    cont: (more?: string) => string
     item: (more?: string) => string
 }
 
@@ -90,7 +91,8 @@ export default class GeneralStyles {
         return {
             body: (more?: string) => `mx-2 my-2 rounded-xl w-[98%] h-full  px-3 py-3 ${more}`,
             head: (more?: string) => `text-lg text-blue-500 ${text} ${more}`,
-            item: (more?: string) => `text-sm ${text} ${more}`
+            cont: (more?: string) => `w-full flex flex-col gap-4${more}`,
+            item: (more?: string) => `text-[15px] ${text} ${more}`
         }
     }
 
