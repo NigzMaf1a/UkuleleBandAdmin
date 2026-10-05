@@ -6,6 +6,7 @@ import Accounts from "../pages/Accounts"
 import AboutAndContact from "../pages/AboutAndContact"
 import Reports from "../pages/Reports"
 import Feedback from "../pages/Feedback"
+import AdminFaqs from "../pages/AdminFaqs"
 
 export default function AppRoutes() {
     return (
@@ -16,6 +17,7 @@ export default function AppRoutes() {
             <Route path="/accounts" element={<Accounts />} />
             <Route path="/about-contact" element={<AboutAndContact />} />
             <Route path="/reports" element={<Reports />} />
+            <Route path="/faqs" element={<AdminFaqs />} />
             <Route path="/feedback" element={<Feedback />} />
 
         </Routes>
