@@ -188,7 +188,7 @@ export default function AboutAndContact() {
 
   return (
     <Skeleton className="about-page">
-      <Strip title="Ukulele Band Admin Module" />
+      <Strip title="" />
       <Main brand="About" />
 
       <Container className="py-4">

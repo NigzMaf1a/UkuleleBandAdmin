@@ -19,20 +19,20 @@ interface User {
   email: string;
   gender: "Male" | "Female";
   regtype:
-    | "Customer"
-    | "DJ"
-    | "Mcee"
-    | "Storeman"
-    | "Accountant"
-    | "Dispatchman"
-    | "Inspector"
-    | "Band"
-    | "Admin"
-    | "Supplier";
+  | "Customer"
+  | "DJ"
+  | "Mcee"
+  | "Storeman"
+  | "Accountant"
+  | "Dispatchman"
+  | "Inspector"
+  | "Band"
+  | "Admin"
+  | "Supplier";
   accstatus:
-    | "Pending"
-    | "Approved"
-    | "Inactive";
+  | "Pending"
+  | "Approved"
+  | "Inactive";
 }
 
 export default function Accounts() {
@@ -76,7 +76,7 @@ export default function Accounts() {
 
   return (
     <Skeleton>
-      <Strip title="Ukulele Band Admin Module" />
+      <Strip title="" />
       <Main brand="Accounts" />
 
       <Container className="py-4">

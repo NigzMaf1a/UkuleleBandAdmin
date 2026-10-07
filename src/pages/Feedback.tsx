@@ -92,9 +92,9 @@ export default function Feedback() {
         prev.map((f) =>
           f.FeedbackID === feedback.FeedbackID
             ? {
-                ...f,
-                response: newResponse,
-              }
+              ...f,
+              response: newResponse,
+            }
             : f
         )
       );
@@ -112,7 +112,7 @@ export default function Feedback() {
 
   return (
     <Skeleton>
-      <Strip title="Ukulele Band Admin Module" />
+      <Strip title="" />
       <Main brand="Feedback" />
 
       <Container className="feed-body py-4">

@@ -131,7 +131,7 @@ export default function Header({ brand }: headerProps) {
                 >
                   <Nav.Link as={Link} to="/dashboard" onClick={() => setShowMenu(false)} className="navigation-item"
                   >
-                    <DynamicP text="Dashboard" className="menu-item-text" />
+                    <DynamicP text="Home" className="menu-item-text" />
                   </Nav.Link>
                   <RoundedImage src={'/account.svg'} />
                 </DynamicDiv>
