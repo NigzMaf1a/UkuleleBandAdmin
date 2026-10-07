@@ -15,38 +15,52 @@ import GeneralStyles from "../tailwind/general"
 const faqs: Faqs[] = [
     {
         FAQID: 1,
-        Question: 'How do I sign up?',
-        Answer: 'Download the app'
+        Email: "@gmail.com",
+        Question: "How do I sign up?",
+        Answer: "Download the app",
+        Approved: "Yes"
     },
     {
         FAQID: 2,
-        Question: 'What are some of the services offered?',
-        Answer: 'Visit '
+        Email: "@gmail.com",
+        Question: "What are some of the services offered?",
+        Answer: "Visit ",
+        Approved: "No"
     },
     {
         FAQID: 3,
-        Question: 'How do I make payments?',
-        Answer: 'After'
+        Email: "@gmail.com",
+        Question: "How do I make payments?",
+        Answer: "After",
+        Approved: "No"
     },
     {
         FAQID: 4,
-        Question: 'How do I sign up?',
-        Answer: 'Download the app'
+        Email: "@gmail.com",
+        Question: "How do I sign up?",
+        Answer: "Download the app",
+        Approved: "Yes"
     },
     {
         FAQID: 5,
-        Question: 'What are some of the services offered?',
-        Answer: 'Visit '
+        Email: "@gmail.com",
+        Question: "What are some of the services offered?",
+        Answer: "Visit ",
+        Approved: "No"
     },
     {
         FAQID: 6,
-        Question: 'How do I make payments?',
-        Answer: 'After'
+        Email: "@gmail.com",
+        Question: "How do I make payments?",
+        Answer: "After",
+        Approved: "No"
     },
     {
         FAQID: 7,
-        Question: 'How do I make payments?',
-        Answer: 'After'
+        Email: "@gmail.com",
+        Question: "How do I make payments?",
+        Answer: "After",
+        Approved: "Yes"
     }
 ]
 
